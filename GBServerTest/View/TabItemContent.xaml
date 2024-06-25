@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="GBServerTest.View.TabItemContent"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GBServerTest.View" 
+             xmlns:vm="clr-namespace:GBServerTest.ViewModel" 
+             d:DataContext="{d:DesignInstance Type=vm:ClientViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="400"/>
+        </Grid.ColumnDefinitions>
+        <TextBox Text="{Binding Log}" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"/>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+            <ScrollViewer>
+                <StackPanel Orientation="Vertical">
+                    <Expander Header="C1 设置超时时间及重发次数">
+                        <StackPanel Background="#FFE5E5E5" Height="150">
+                            <TextBlock Text="超时时间(秒):" Margin="5"/>
+                            <TextBox Text="{Binding OverTime}" Margin="5,0"/>
+                            <TextBlock Text="重发次数:" Margin="5"/>
+                            <TextBox Text="{Binding ReCount}" Margin="5,0"/>
+                            <Button Content="发送" Margin="5" Command="{Binding C1TestCommand}"/>
+                        </StackPanel>
+                    </Expander>
+                </StackPanel>
+            </ScrollViewer>
+            <StackPanel Orientation="Horizontal" Grid.Row="1">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="MN:" Width="28" Margin="10,5,0,0" VerticalAlignment="Center"/>
+                        <TextBox Width="80" Height="20" Margin="10,5,0,0" Text="{Binding MN}" VerticalContentAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="PW:" Width="28" Margin="10,5,0,0" VerticalAlignment="Center"/>
+                        <TextBox Width="80" Height="20" Margin="10,5,0,0" Text="{Binding PW}" VerticalContentAlignment="Center"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="ST:" Width="28" Margin="10,5,0,0" VerticalAlignment="Center"/>
+                        <ComboBox Width="120" Height="20" Margin="10,5,0,0" ItemsSource="{Binding STs}" SelectedItem="{Binding ST}" VerticalContentAlignment="Center"/>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>
