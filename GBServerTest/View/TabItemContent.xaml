@@ -30,6 +30,24 @@
                             <Button Content="发送" Margin="5" Command="{Binding C1TestCommand}"/>
                         </StackPanel>
                     </Expander>
+                    <Expander Header="C2 提取现场机时间">
+                        <StackPanel Background="#FFE5E5E5" Height="150">
+                            <TextBlock Text="对应污染物编码:" Margin="5"/>
+                            <TextBox Text="{Binding C2PolId}" Margin="5,0"/>
+                            <Button Content="提取" Margin="5" Command="{Binding C2TestCommand}"/>
+                            <TextBlock Text="现场时间:" Margin="5"/>
+                            <TextBox Text="{Binding SystemTime}" IsReadOnly="True" Margin="5,0"/>
+                        </StackPanel>
+                    </Expander>
+                    <Expander Header="C3 设置现场机时间">
+                        <StackPanel Background="#FFE5E5E5" Height="150">
+                            <TextBlock Text="对应污染物编码:" Margin="5"/>
+                            <TextBox Text="{Binding C3PolId}" Margin="5,0"/>
+                            <TextBlock Text="发送时间:" Margin="5"/>
+                            <TextBox Text="{Binding SendTime}" Margin="5,0"/>
+                            <Button Content="发送" Margin="5" Command="{Binding C3TestCommand}"/>
+                        </StackPanel>
+                    </Expander>
                 </StackPanel>
             </ScrollViewer>
             <StackPanel Orientation="Horizontal" Grid.Row="1">

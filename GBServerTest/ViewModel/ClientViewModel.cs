@@ -82,5 +82,76 @@ namespace GBServerTest.ViewModel
             }
         }
         #endregion
+
+        #region C2
+        [ObservableProperty]
+        private string _c2PolId = "w01018";
+        [ObservableProperty]
+        private string? _systemTime;
+        [RelayCommand]
+        private async Task C2TestAsync()
+        {
+            if (MN == null)
+            {
+                MessageBox.Show("MN空");
+                return;
+            }
+            if (PW == null)
+            {
+                MessageBox.Show("PW空");
+                return;
+            }
+            try
+            {
+                SystemTime = (await _gb.GetSystemTimeAsync((int)ClientId!, MN, PW, ST, C2PolId)).ToString("yyyy-MM-dd HH:mm:ss");
+            }
+            catch (TimeoutException)
+            {
+                MessageBox.Show("请求超时");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
+
+        #region C3
+        [ObservableProperty]
+        private string _c3PolId = "w01018";
+        [ObservableProperty]
+        private string _sendTime = DateTime.Now.ToString("yyyyMMddHHmmss");
+        [RelayCommand]
+        private async Task C3TestAsync()
+        {
+            if (MN == null)
+            {
+                MessageBox.Show("MN空");
+                return;
+            }
+            if (PW == null)
+            {
+                MessageBox.Show("PW空");
+                return;
+            }
+            if (!DateTime.TryParseExact(SendTime, "yyyyMMddHHmmss", null, System.Globalization.DateTimeStyles.None, out var systemTime))
+            {
+                MessageBox.Show("发送时间有误");
+                return;
+            }
+            try
+            {
+                await _gb.SetSystemTimeAsync((int)ClientId!, MN, PW, ST, C3PolId, systemTime);
+            }
+            catch (TimeoutException)
+            {
+                MessageBox.Show("请求超时");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
     }
 }
