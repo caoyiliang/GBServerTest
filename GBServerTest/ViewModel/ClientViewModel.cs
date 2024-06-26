@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using HJ212_Server;
+using System.Collections.ObjectModel;
 using System.Windows;
 
 namespace GBServerTest.ViewModel
@@ -373,6 +374,161 @@ namespace GBServerTest.ViewModel
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+        #endregion
+
+        #region C11
+        [ObservableProperty]
+        private int _timeOut_C11 = 5000;
+        [RelayCommand]
+        private async Task C11TestAsync()
+        {
+            if (MN == null)
+            {
+                MessageBox.Show("MN空");
+                return;
+            }
+            if (PW == null)
+            {
+                MessageBox.Show("PW空");
+                return;
+            }
+            try
+            {
+                await _gb.StopRealTimeDataAsync((int)ClientId!, MN, PW, ST, TimeOut_C11);
+            }
+            catch (TimeoutException)
+            {
+                MessageBox.Show("请求超时");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
+
+        #region C12
+        [ObservableProperty]
+        private int _timeOut_C12 = 5000;
+        [RelayCommand]
+        private async Task C12TestAsync()
+        {
+            if (MN == null)
+            {
+                MessageBox.Show("MN空");
+                return;
+            }
+            if (PW == null)
+            {
+                MessageBox.Show("PW空");
+                return;
+            }
+            try
+            {
+                await _gb.StartRunningStateDataAsync((int)ClientId!, MN, PW, ST, TimeOut_C12);
+            }
+            catch (TimeoutException)
+            {
+                MessageBox.Show("请求超时");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
+
+        #region C13
+        [ObservableProperty]
+        private int _timeOut_C13 = 5000;
+        [RelayCommand]
+        private async Task C13TestAsync()
+        {
+            if (MN == null)
+            {
+                MessageBox.Show("MN空");
+                return;
+            }
+            if (PW == null)
+            {
+                MessageBox.Show("PW空");
+                return;
+            }
+            try
+            {
+                await _gb.StopRunningStateDataAsync((int)ClientId!, MN, PW, ST, TimeOut_C13);
+            }
+            catch (TimeoutException)
+            {
+                MessageBox.Show("请求超时");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
+
+        #region C14
+        [ObservableProperty]
+        private ObservableCollection<HJ212_Server.Model.RealTimeData> _RealTimeDatas = [];
+        [ObservableProperty]
+        private bool _C14;
+        partial void OnC14Changed(bool value)
+        {
+            if (value)
+            {
+                _gb!.OnUploadRealTimeData -= ClientViewModel_OnUploadRealTimeData;
+                _gb!.OnUploadRealTimeData += ClientViewModel_OnUploadRealTimeData;
+            }
+            else
+            {
+                _gb!.OnUploadRealTimeData -= ClientViewModel_OnUploadRealTimeData;
+            }
+        }
+
+        private async Task ClientViewModel_OnUploadRealTimeData(int clientId, (DateTime DataTime, List<HJ212_Server.Model.RealTimeData> Data, HJ212_Server.Model.RspInfo RspInfo) objects)
+        {
+            await App.Current.Dispatcher.InvokeAsync(() =>
+            {
+                RealTimeDatas.Clear();
+                foreach (var item in objects.Data)
+                {
+                    RealTimeDatas.Add(item);
+                }
+            });
+        }
+        #endregion
+
+        #region C15
+        [ObservableProperty]
+        private ObservableCollection<HJ212_Server.Model.RunningStateData> _RunningStateDatas = [];
+        [ObservableProperty]
+        private bool _C15;
+        partial void OnC15Changed(bool value)
+        {
+            if (value)
+            {
+                _gb!.OnUploadRunningStateData -= ClientViewModel_OnUploadRunningStateData;
+                _gb!.OnUploadRunningStateData += ClientViewModel_OnUploadRunningStateData; ;
+            }
+            else
+            {
+                _gb!.OnUploadRunningStateData -= ClientViewModel_OnUploadRunningStateData;
+            }
+        }
+
+        private async Task ClientViewModel_OnUploadRunningStateData(int clientId, (DateTime DataTime, List<HJ212_Server.Model.RunningStateData> Data, HJ212_Server.Model.RspInfo RspInfo) objects)
+        {
+            await App.Current.Dispatcher.InvokeAsync(() =>
+            {
+                RunningStateDatas.Clear();
+                foreach (var item in objects.Data)
+                {
+                    RunningStateDatas.Add(item);
+                }
+            });
         }
         #endregion
     }

@@ -108,7 +108,53 @@
                         <StackPanel Background="#FFE5E5E5" Height="100">
                             <TextBlock Text="响应超时_测试用非下发参数（毫秒） :" Margin="5"/>
                             <TextBox Text="{Binding TimeOut_C10}" Margin="5,0"/>
-                            <Button Content="开启取实时数据" Margin="5" Command="{Binding C10TestCommand}"/>
+                            <Button Content="取污染物实时数据" Margin="5" Command="{Binding C10TestCommand}"/>
+                        </StackPanel>
+                    </Expander>
+                    <Expander Header="C11 停止察看污染物实时数据">
+                        <StackPanel Background="#FFE5E5E5" Height="100">
+                            <TextBlock Text="响应超时_测试用非下发参数（毫秒） :" Margin="5"/>
+                            <TextBox Text="{Binding TimeOut_C11}" Margin="5,0"/>
+                            <Button Content="停止察看污染物实时数据" Margin="5" Command="{Binding C11TestCommand}"/>
+                        </StackPanel>
+                    </Expander>
+                    <Expander Header="C12 取设备运行状态数据">
+                        <StackPanel Background="#FFE5E5E5" Height="100">
+                            <TextBlock Text="响应超时_测试用非下发参数（毫秒） :" Margin="5"/>
+                            <TextBox Text="{Binding TimeOut_C12}" Margin="5,0"/>
+                            <Button Content="取设备运行状态数据" Margin="5" Command="{Binding C12TestCommand}"/>
+                        </StackPanel>
+                    </Expander>
+                    <Expander Header="C13 停止察看设备运行状态">
+                        <StackPanel Background="#FFE5E5E5" Height="100">
+                            <TextBlock Text="响应超时_测试用非下发参数（毫秒） :" Margin="5"/>
+                            <TextBox Text="{Binding TimeOut_C13}" Margin="5,0"/>
+                            <Button Content="停止察看设备运行状态" Margin="5" Command="{Binding C13TestCommand}"/>
+                        </StackPanel>
+                    </Expander>
+                    <Expander Header="C14 上传污染物实时数据(C29上传工况实时数据 同)">
+                        <StackPanel Background="#FFE5E5E5" Height="240">
+                            <CheckBox Content="启用" Margin="5" IsChecked="{Binding C14}"/>
+                            <DataGrid Height="200" Margin="5" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding RealTimeDatas}">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="污染物名称" Binding="{Binding Name}" Width="*"/>
+                                    <DataGridTextColumn Header="Rtd" Binding="{Binding Rtd}" Width="*"/>
+                                    <DataGridTextColumn Header="Flag" Binding="{Binding Flag}" Width="Auto"/>
+                                    <DataGridTextColumn Header="SampleTime" Binding="{Binding SampleTime}" Width="*"/>
+                                    <DataGridTextColumn Header="EFlag" Binding="{Binding EFlag}" Width="Auto"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </StackPanel>
+                    </Expander>
+                    <Expander Header="C15 上传设备运行状态数据">
+                        <StackPanel Background="#FFE5E5E5" Height="240">
+                            <CheckBox Content="启用" Margin="5" IsChecked="{Binding C15}"/>
+                            <DataGrid Height="200" Margin="5" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding RunningStateDatas}">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="污染治理设施名称" Binding="{Binding Name}" Width="*"/>
+                                    <DataGridTextColumn Header="RunningState" Binding="{Binding RS}" Width="*"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
                         </StackPanel>
                     </Expander>
                 </StackPanel>
