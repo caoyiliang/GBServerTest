@@ -22,30 +22,93 @@
             <ScrollViewer>
                 <StackPanel Orientation="Vertical">
                     <Expander Header="C1 设置超时时间及重发次数">
-                        <StackPanel Background="#FFE5E5E5" Height="150">
+                        <StackPanel Background="#FFE5E5E5" Height="180">
                             <TextBlock Text="超时时间(秒):" Margin="5"/>
                             <TextBox Text="{Binding OverTime}" Margin="5,0"/>
                             <TextBlock Text="重发次数:" Margin="5"/>
                             <TextBox Text="{Binding ReCount}" Margin="5,0"/>
+                            <TextBlock Text="响应超时_测试用非下发参数（毫秒） :" Margin="5"/>
+                            <TextBox Text="{Binding TimeOut_C1}" Margin="5,0"/>
                             <Button Content="发送" Margin="5" Command="{Binding C1TestCommand}"/>
                         </StackPanel>
                     </Expander>
                     <Expander Header="C2 提取现场机时间">
-                        <StackPanel Background="#FFE5E5E5" Height="150">
+                        <StackPanel Background="#FFE5E5E5" Height="180">
                             <TextBlock Text="对应污染物编码:" Margin="5"/>
                             <TextBox Text="{Binding C2PolId}" Margin="5,0"/>
+                            <TextBlock Text="响应超时_测试用非下发参数（毫秒） :" Margin="5"/>
+                            <TextBox Text="{Binding TimeOut_C2}" Margin="5,0"/>
                             <Button Content="提取" Margin="5" Command="{Binding C2TestCommand}"/>
                             <TextBlock Text="现场时间:" Margin="5"/>
                             <TextBox Text="{Binding SystemTime}" IsReadOnly="True" Margin="5,0"/>
                         </StackPanel>
                     </Expander>
                     <Expander Header="C3 设置现场机时间">
-                        <StackPanel Background="#FFE5E5E5" Height="150">
+                        <StackPanel Background="#FFE5E5E5" Height="180">
                             <TextBlock Text="对应污染物编码:" Margin="5"/>
                             <TextBox Text="{Binding C3PolId}" Margin="5,0"/>
-                            <TextBlock Text="发送时间:" Margin="5"/>
+                            <TextBlock Text="下发时间:" Margin="5"/>
                             <TextBox Text="{Binding SendTime}" Margin="5,0"/>
+                            <TextBlock Text="响应超时_测试用非下发参数（毫秒） :" Margin="5"/>
+                            <TextBox Text="{Binding TimeOut_C3}" Margin="5,0"/>
                             <Button Content="发送" Margin="5" Command="{Binding C3TestCommand}"/>
+                        </StackPanel>
+                    </Expander>
+                    <Expander Header="C4 现场机时间校准请求">
+                        <StackPanel Background="#FFE5E5E5" Height="50">
+                            <CheckBox Content="启用" Margin="5" IsChecked="{Binding C4}"/>
+                        </StackPanel>
+                    </Expander>
+                    <Expander Header="C5 提取实时数据间隔">
+                        <StackPanel Background="#FFE5E5E5" Height="150">
+                            <TextBlock Text="实时数据间隔(秒):" Margin="5"/>
+                            <TextBox Text="{Binding RtdInterval}" IsReadOnly="True" Margin="5,0"/>
+                            <TextBlock Text="响应超时_测试用非下发参数（毫秒） :" Margin="5"/>
+                            <TextBox Text="{Binding TimeOut_C5}" Margin="5,0"/>
+                            <Button Content="提取" Margin="5" Command="{Binding C5TestCommand}"/>
+                        </StackPanel>
+                    </Expander>
+                    <Expander Header="C6 设置实时数据间隔">
+                        <StackPanel Background="#FFE5E5E5" Height="150">
+                            <TextBlock Text="实时数据间隔(秒):" Margin="5"/>
+                            <TextBox Text="{Binding RtdInterval}" Margin="5,0"/>
+                            <TextBlock Text="响应超时_测试用非下发参数（毫秒） :" Margin="5"/>
+                            <TextBox Text="{Binding TimeOut_C6}" Margin="5,0"/>
+                            <Button Content="设置" Margin="5" Command="{Binding C6TestCommand}"/>
+                        </StackPanel>
+                    </Expander>
+                    <Expander Header="C7 提取分钟数据间隔">
+                        <StackPanel Background="#FFE5E5E5" Height="150">
+                            <TextBlock Text="分钟数据间隔:" Margin="5"/>
+                            <TextBox Text="{Binding MinInterval}" IsReadOnly="True" Margin="5,0"/>
+                            <TextBlock Text="响应超时_测试用非下发参数（毫秒） :" Margin="5"/>
+                            <TextBox Text="{Binding TimeOut_C7}" Margin="5,0"/>
+                            <Button Content="提取" Margin="5" Command="{Binding C7TestCommand}"/>
+                        </StackPanel>
+                    </Expander>
+                    <Expander Header="C8 设置分钟数据间隔">
+                        <StackPanel Background="#FFE5E5E5" Height="150">
+                            <TextBlock Text="分钟数据间隔:" Margin="5"/>
+                            <TextBox Text="{Binding MinInterval}" Margin="5,0"/>
+                            <TextBlock Text="响应超时_测试用非下发参数（毫秒） :" Margin="5"/>
+                            <TextBox Text="{Binding TimeOut_C8}" Margin="5,0"/>
+                            <Button Content="设置" Margin="5" Command="{Binding C8TestCommand}"/>
+                        </StackPanel>
+                    </Expander>
+                    <Expander Header="C9 设置现场机访问密码">
+                        <StackPanel Background="#FFE5E5E5" Height="150">
+                            <TextBlock Text="访问密码:" Margin="5"/>
+                            <TextBox Text="{Binding NewPW}" Margin="5,0"/>
+                            <TextBlock Text="响应超时_测试用非下发参数（毫秒） :" Margin="5"/>
+                            <TextBox Text="{Binding TimeOut_C9}" Margin="5,0"/>
+                            <Button Content="设置" Margin="5" Command="{Binding C9TestCommand}"/>
+                        </StackPanel>
+                    </Expander>
+                    <Expander Header="C10 取污染物实时数据">
+                        <StackPanel Background="#FFE5E5E5" Height="100">
+                            <TextBlock Text="响应超时_测试用非下发参数（毫秒） :" Margin="5"/>
+                            <TextBox Text="{Binding TimeOut_C10}" Margin="5,0"/>
+                            <Button Content="开启取实时数据" Margin="5" Command="{Binding C10TestCommand}"/>
                         </StackPanel>
                     </Expander>
                 </StackPanel>

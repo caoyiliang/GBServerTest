@@ -21,16 +21,16 @@ namespace GBServerTest.ViewModel
         private string? _log;
 
         [ObservableProperty]
-        private string? _MN;
+        private string? _MN = "88888888";
 
         [ObservableProperty]
-        private string? _PW;
+        private string? _PW = "123456";
 
         [ObservableProperty]
         private IEnumerable<ST> _STs = Enum.GetValues(typeof(ST)).Cast<ST>();
 
         [ObservableProperty]
-        private ST _ST;
+        private ST _ST = ST.大气环境污染源;
 
         [ObservableProperty]
         private string? _title;
@@ -55,6 +55,8 @@ namespace GBServerTest.ViewModel
         }
 
         #region C1
+        [ObservableProperty]
+        private int _timeOut_C1 = 5000;
         [RelayCommand]
         private async Task C1TestAsync()
         {
@@ -70,7 +72,7 @@ namespace GBServerTest.ViewModel
             }
             try
             {
-                await _gb.SetTimeoutAndRetryAsync((int)ClientId!, MN, PW, ST, OverTime, ReCount);
+                await _gb.SetTimeoutAndRetryAsync((int)ClientId!, MN, PW, ST, OverTime, ReCount, TimeOut_C1);
             }
             catch (TimeoutException)
             {
@@ -84,6 +86,8 @@ namespace GBServerTest.ViewModel
         #endregion
 
         #region C2
+        [ObservableProperty]
+        private int _timeOut_C2 = 5000;
         [ObservableProperty]
         private string _c2PolId = "w01018";
         [ObservableProperty]
@@ -103,7 +107,7 @@ namespace GBServerTest.ViewModel
             }
             try
             {
-                SystemTime = (await _gb.GetSystemTimeAsync((int)ClientId!, MN, PW, ST, C2PolId)).ToString("yyyy-MM-dd HH:mm:ss");
+                SystemTime = (await _gb.GetSystemTimeAsync((int)ClientId!, MN, PW, ST, C2PolId, TimeOut_C2)).ToString("yyyy-MM-dd HH:mm:ss");
             }
             catch (TimeoutException)
             {
@@ -117,6 +121,8 @@ namespace GBServerTest.ViewModel
         #endregion
 
         #region C3
+        [ObservableProperty]
+        private int _timeOut_C3 = 5000;
         [ObservableProperty]
         private string _c3PolId = "w01018";
         [ObservableProperty]
@@ -141,7 +147,223 @@ namespace GBServerTest.ViewModel
             }
             try
             {
-                await _gb.SetSystemTimeAsync((int)ClientId!, MN, PW, ST, C3PolId, systemTime);
+                await _gb.SetSystemTimeAsync((int)ClientId!, MN, PW, ST, C3PolId, systemTime, TimeOut_C3);
+            }
+            catch (TimeoutException)
+            {
+                MessageBox.Show("请求超时");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
+
+        #region C4
+        [ObservableProperty]
+        private bool _C4;
+        partial void OnC4Changed(bool value)
+        {
+            if (value)
+            {
+                _gb!.OnAskSetSystemTime -= ClientViewModel_OnAskSetSystemTime;
+                _gb!.OnAskSetSystemTime += ClientViewModel_OnAskSetSystemTime;
+            }
+            else
+            {
+                _gb!.OnAskSetSystemTime -= ClientViewModel_OnAskSetSystemTime;
+            }
+        }
+
+        private async Task ClientViewModel_OnAskSetSystemTime(int clientId, (string PolId, HJ212_Server.Model.RspInfo RspInfo) objects)
+        {
+            MessageBox.Show($"PolId:{objects.PolId} 请求设置系统时间");
+            await Task.CompletedTask;
+        }
+        #endregion
+
+        #region C5
+        [ObservableProperty]
+        private int _timeOut_C5 = 5000;
+        [ObservableProperty]
+        private int? _rtdInterval;
+        [RelayCommand]
+        private async Task C5TestAsync()
+        {
+            if (MN == null)
+            {
+                MessageBox.Show("MN空");
+                return;
+            }
+            if (PW == null)
+            {
+                MessageBox.Show("PW空");
+                return;
+            }
+            try
+            {
+                RtdInterval = await _gb.GetRealTimeDataIntervalAsync((int)ClientId!, MN, PW, ST, TimeOut_C5);
+            }
+            catch (TimeoutException)
+            {
+                MessageBox.Show("请求超时");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
+
+        #region C6
+        [ObservableProperty]
+        private int _timeOut_C6 = 5000;
+        [RelayCommand]
+        private async Task C6TestAsync()
+        {
+            if (MN == null)
+            {
+                MessageBox.Show("MN空");
+                return;
+            }
+            if (PW == null)
+            {
+                MessageBox.Show("PW空");
+                return;
+            }
+            try
+            {
+                await _gb.SetRealTimeDataIntervalAsync((int)ClientId!, MN, PW, ST, RtdInterval ?? 0, TimeOut_C6);
+            }
+            catch (TimeoutException)
+            {
+                MessageBox.Show("请求超时");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
+
+        #region C7
+        [ObservableProperty]
+        private int _timeOut_C7 = 5000;
+        [ObservableProperty]
+        private int? _minInterval;
+        [RelayCommand]
+        private async Task C7TestAsync()
+        {
+            if (MN == null)
+            {
+                MessageBox.Show("MN空");
+                return;
+            }
+            if (PW == null)
+            {
+                MessageBox.Show("PW空");
+                return;
+            }
+            try
+            {
+                MinInterval = await _gb.GetMinuteDataIntervalAsync((int)ClientId!, MN, PW, ST, TimeOut_C7);
+            }
+            catch (TimeoutException)
+            {
+                MessageBox.Show("请求超时");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
+
+        #region C8
+        [ObservableProperty]
+        private int _timeOut_C8 = 5000;
+        [RelayCommand]
+        private async Task C8TestAsync()
+        {
+            if (MN == null)
+            {
+                MessageBox.Show("MN空");
+                return;
+            }
+            if (PW == null)
+            {
+                MessageBox.Show("PW空");
+                return;
+            }
+            try
+            {
+                await _gb.SetMinuteDataIntervalAsync((int)ClientId!, MN, PW, ST, MinInterval ?? 0, TimeOut_C8);
+            }
+            catch (TimeoutException)
+            {
+                MessageBox.Show("请求超时");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
+
+        #region C9
+        [ObservableProperty]
+        private int _timeOut_C9 = 5000;
+        [ObservableProperty]
+        private string _newPW = "123456";
+        [RelayCommand]
+        private async Task C9TestAsync()
+        {
+            if (MN == null)
+            {
+                MessageBox.Show("MN空");
+                return;
+            }
+            if (PW == null)
+            {
+                MessageBox.Show("PW空");
+                return;
+            }
+            try
+            {
+                await _gb.SetNewPWAsync((int)ClientId!, MN, PW, ST, NewPW, TimeOut_C9);
+                PW = NewPW;
+            }
+            catch (TimeoutException)
+            {
+                MessageBox.Show("请求超时");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
+
+        #region C10
+        [ObservableProperty]
+        private int _timeOut_C10 = 5000;
+        [RelayCommand]
+        private async Task C10TestAsync()
+        {
+            if (MN == null)
+            {
+                MessageBox.Show("MN空");
+                return;
+            }
+            if (PW == null)
+            {
+                MessageBox.Show("PW空");
+                return;
+            }
+            try
+            {
+                await _gb.StartRealTimeDataAsync((int)ClientId!, MN, PW, ST, TimeOut_C10);
             }
             catch (TimeoutException)
             {
