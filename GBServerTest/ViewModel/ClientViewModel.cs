@@ -1006,5 +1006,183 @@ namespace GBServerTest.ViewModel
             }
         }
         #endregion
+
+        #region C31
+        [ObservableProperty]
+        private int _timeOut_C31 = 5000;
+        [ObservableProperty]
+        private string _c31PolId = "w01018";
+        [RelayCommand]
+        private async Task C31TestAsync()
+        {
+            if (MN == null)
+            {
+                MessageBox.Show("MN空");
+                return;
+            }
+            if (PW == null)
+            {
+                MessageBox.Show("PW空");
+                return;
+            }
+            try
+            {
+                await _gb.RealTimeSamplingAsync((int)ClientId!, MN, PW, ST, C31PolId, TimeOut_C31);
+            }
+            catch (TimeoutException)
+            {
+                MessageBox.Show("请求超时");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
+
+        #region C32
+        [ObservableProperty]
+        private int _timeOut_C32 = 5000;
+        [ObservableProperty]
+        private string _c32PolId = "w01018";
+        [RelayCommand]
+        private async Task C32TestAsync()
+        {
+            if (MN == null)
+            {
+                MessageBox.Show("MN空");
+                return;
+            }
+            if (PW == null)
+            {
+                MessageBox.Show("PW空");
+                return;
+            }
+            try
+            {
+                await _gb.StartCleaningOrBlowbackAsync((int)ClientId!, MN, PW, ST, C32PolId, TimeOut_C32);
+            }
+            catch (TimeoutException)
+            {
+                MessageBox.Show("请求超时");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
+
+        #region C33
+        [ObservableProperty]
+        private int _timeOut_C33 = 5000;
+        [ObservableProperty]
+        private string _c33PolId = "w01018";
+        [RelayCommand]
+        private async Task C33TestAsync()
+        {
+            if (MN == null)
+            {
+                MessageBox.Show("MN空");
+                return;
+            }
+            if (PW == null)
+            {
+                MessageBox.Show("PW空");
+                return;
+            }
+            try
+            {
+                await _gb.ComparisonSamplingAsync((int)ClientId!, MN, PW, ST, C33PolId, TimeOut_C33);
+            }
+            catch (TimeoutException)
+            {
+                MessageBox.Show("请求超时");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
+
+        #region C34
+        [ObservableProperty]
+        private int _timeOut_C34 = 5000;
+        [ObservableProperty]
+        private string? _DataTime_C34;
+        [ObservableProperty]
+        private string? _VaseNo;
+        [RelayCommand]
+        private async Task C34TestAsync()
+        {
+            if (MN == null)
+            {
+                MessageBox.Show("MN空");
+                return;
+            }
+            if (PW == null)
+            {
+                MessageBox.Show("PW空");
+                return;
+            }
+            try
+            {
+                (DateTime DataTime, string VaseNo) rs = await _gb.OutOfStandardRetentionSampleAsync((int)ClientId!, MN, PW, ST, TimeOut_C34);
+                DataTime_C34 = rs.DataTime.ToString("yyyy-MM-dd HH:mm:ss");
+                VaseNo = rs.VaseNo;
+            }
+            catch (TimeoutException)
+            {
+                MessageBox.Show("请求超时");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
+
+        #region C35
+        [ObservableProperty]
+        private int _timeOut_C35 = 5000;
+        [ObservableProperty]
+        private string _c35PolId = "w01018";
+        [ObservableProperty]
+        private string _cstartTime = "000000";
+        [ObservableProperty]
+        private int _ctime = 1;
+        [RelayCommand]
+        private async Task C35TestAsync()
+        {
+            if (MN == null)
+            {
+                MessageBox.Show("MN空");
+                return;
+            }
+            if (PW == null)
+            {
+                MessageBox.Show("PW空");
+                return;
+            }
+            if (!TimeOnly.TryParseExact(CstartTime,"HHmmss", out var startTime))
+            {
+                MessageBox.Show("开始时间有误");
+                return;
+            }
+            try
+            {
+                await _gb.SetSamplingPeriodAsync((int)ClientId!, MN, PW, ST, C35PolId, startTime, Ctime, TimeOut_C35);
+            }
+            catch (TimeoutException)
+            {
+                MessageBox.Show("请求超时");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
     }
 }

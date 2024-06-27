@@ -344,6 +344,57 @@
                             <Button Content="发送" Margin="5" Command="{Binding C30TestCommand}"/>
                         </StackPanel>
                     </Expander>
+                    <Expander Header="C31 即时采样">
+                        <StackPanel Background="#FFE5E5E5" Height="120">
+                            <TextBlock Text="对应污染物编码:" Margin="5"/>
+                            <TextBox Text="{Binding C31PolId}" Margin="5,0"/>
+                            <TextBlock Text="响应超时_测试用非下发参数（毫秒） :" Margin="5"/>
+                            <TextBox Text="{Binding TimeOut_C31}" Margin="5,0"/>
+                            <Button Content="发送" Margin="5" Command="{Binding C31TestCommand}"/>
+                        </StackPanel>
+                    </Expander>
+                    <Expander Header="C32 启动清洗/反吹">
+                        <StackPanel Background="#FFE5E5E5" Height="120">
+                            <TextBlock Text="对应污染物编码:" Margin="5"/>
+                            <TextBox Text="{Binding C32PolId}" Margin="5,0"/>
+                            <TextBlock Text="响应超时_测试用非下发参数（毫秒） :" Margin="5"/>
+                            <TextBox Text="{Binding TimeOut_C32}" Margin="5,0"/>
+                            <Button Content="发送" Margin="5" Command="{Binding C32TestCommand}"/>
+                        </StackPanel>
+                    </Expander>
+                    <Expander Header="C33 比对采样">
+                        <StackPanel Background="#FFE5E5E5" Height="120">
+                            <TextBlock Text="对应污染物编码:" Margin="5"/>
+                            <TextBox Text="{Binding C33PolId}" Margin="5,0"/>
+                            <TextBlock Text="响应超时_测试用非下发参数（毫秒） :" Margin="5"/>
+                            <TextBox Text="{Binding TimeOut_C33}" Margin="5,0"/>
+                            <Button Content="发送" Margin="5" Command="{Binding C33TestCommand}"/>
+                        </StackPanel>
+                    </Expander>
+                    <Expander Header="C34 超标留样">
+                        <StackPanel Background="#FFE5E5E5" Height="200">
+                            <TextBlock Text="响应超时_测试用非下发参数（毫秒） :" Margin="5"/>
+                            <TextBox Text="{Binding TimeOut_C34}" Margin="5,0"/>
+                            <Button Content="发送" Margin="5" Command="{Binding C34TestCommand}"/>
+                            <TextBlock Text="留样时间:" Margin="5"/>
+                            <TextBox Text="{Binding DataTime_C34}" IsReadOnly="True" Margin="5,0"/>
+                            <TextBlock Text="留样瓶编号:" Margin="5"/>
+                            <TextBox Text="{Binding VaseNo}" IsReadOnly="True" Margin="5,0"/>
+                        </StackPanel>
+                    </Expander>
+                    <Expander Header="C35 设置采样时间周期">
+                        <StackPanel Background="#FFE5E5E5" Height="200">
+                            <TextBlock Text="对应污染物编码:" Margin="5"/>
+                            <TextBox Text="{Binding C35PolId}" Margin="5,0"/>
+                            <TextBlock Text="采样起始时间:" Margin="5"/>
+                            <TextBox Text="{Binding CstartTime}" Margin="5,0"/>
+                            <TextBlock Text="采样时间间隔，单位：小时:" Margin="5"/>
+                            <TextBox Text="{Binding Ctime}" Margin="5,0"/>
+                            <TextBlock Text="响应超时_测试用非下发参数（毫秒） :" Margin="5"/>
+                            <TextBox Text="{Binding TimeOut_C35}" Margin="5,0"/>
+                            <Button Content="发送" Margin="5" Command="{Binding C35TestCommand}"/>
+                        </StackPanel>
+                    </Expander>
                 </StackPanel>
             </ScrollViewer>
             <StackPanel Orientation="Horizontal" Grid.Row="1">
