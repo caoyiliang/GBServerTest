@@ -157,7 +157,7 @@
                             </DataGrid>
                         </StackPanel>
                     </Expander>
-                    <Expander Header="C16 上传污染物分钟数据">
+                    <Expander Header="C16 上传污染物分钟数据(C26上传噪声声级分钟数据 同)">
                         <StackPanel Background="#FFE5E5E5" Height="240">
                             <CheckBox Content="启用" Margin="5" IsChecked="{Binding C16}"/>
                             <DataGrid Height="200" Margin="5" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding MinuteDatas}">
@@ -168,11 +168,12 @@
                                     <DataGridTextColumn Header="Avg" Binding="{Binding Avg}" Width="*"/>
                                     <DataGridTextColumn Header="Max" Binding="{Binding Max}" Width="*"/>
                                     <DataGridTextColumn Header="Flag" Binding="{Binding Flag}" Width="Auto"/>
+                                    <DataGridTextColumn Header="Data" Binding="{Binding Data}" Width="*"/>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </StackPanel>
                     </Expander>
-                    <Expander Header="C17 上传污染物小时数据">
+                    <Expander Header="C17 上传污染物小时数据(C27上传噪声声级小时数据 同)">
                         <StackPanel Background="#FFE5E5E5" Height="240">
                             <CheckBox Content="启用" Margin="5" IsChecked="{Binding C17}"/>
                             <DataGrid Height="200" Margin="5" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding HourDatas}">
@@ -183,11 +184,12 @@
                                     <DataGridTextColumn Header="Avg" Binding="{Binding Avg}" Width="*"/>
                                     <DataGridTextColumn Header="Max" Binding="{Binding Max}" Width="*"/>
                                     <DataGridTextColumn Header="Flag" Binding="{Binding Flag}" Width="Auto"/>
+                                    <DataGridTextColumn Header="Data" Binding="{Binding Data}" Width="*"/>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </StackPanel>
                     </Expander>
-                    <Expander Header="C18 上传污染物日历史数据">
+                    <Expander Header="C18 上传污染物日历史数据(C28上传噪声声级日历史数据 同)">
                         <StackPanel Background="#FFE5E5E5" Height="240">
                             <CheckBox Content="启用" Margin="5" IsChecked="{Binding C18}"/>
                             <DataGrid Height="200" Margin="5" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding DayDatas}">
@@ -198,6 +200,9 @@
                                     <DataGridTextColumn Header="Avg" Binding="{Binding Avg}" Width="*"/>
                                     <DataGridTextColumn Header="Max" Binding="{Binding Max}" Width="*"/>
                                     <DataGridTextColumn Header="Flag" Binding="{Binding Flag}" Width="Auto"/>
+                                    <DataGridTextColumn Header="Data" Binding="{Binding Data}" Width="*"/>
+                                    <DataGridTextColumn Header="DayData" Binding="{Binding DayData}" Width="*"/>
+                                    <DataGridTextColumn Header="NightData" Binding="{Binding NightData}" Width="*"/>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </StackPanel>
@@ -328,6 +333,15 @@
                             <TextBox Text="{Binding DataTime_C24}" Margin="5,0"/>
                             <TextBlock Text="RestartTime :" Margin="5"/>
                             <TextBox Text="{Binding RestartTime_C24}" Margin="5,0"/>
+                        </StackPanel>
+                    </Expander>
+                    <Expander Header="C30 零点校准量程校准">
+                        <StackPanel Background="#FFE5E5E5" Height="120">
+                            <TextBlock Text="对应污染物编码:" Margin="5"/>
+                            <TextBox Text="{Binding C30PolId}" Margin="5,0"/>
+                            <TextBlock Text="响应超时_测试用非下发参数（毫秒） :" Margin="5"/>
+                            <TextBox Text="{Binding TimeOut_C30}" Margin="5,0"/>
+                            <Button Content="发送" Margin="5" Command="{Binding C30TestCommand}"/>
                         </StackPanel>
                     </Expander>
                 </StackPanel>

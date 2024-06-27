@@ -665,7 +665,7 @@ namespace GBServerTest.ViewModel
         private string _endTime_C20 = DateTime.Now.ToString("yyyyMMddHHmmss");
         private List<HJ212_Server.Model.HistoryData> _MinuteHistoryDatas = [];
         [ObservableProperty]
-        private string _historyDateTime_C20;
+        private string? _historyDateTime_C20;
         [ObservableProperty]
         private int _total_C20;
         [ObservableProperty]
@@ -738,7 +738,7 @@ namespace GBServerTest.ViewModel
         private string _endTime_C21 = DateTime.Now.ToString("yyyyMMddHHmmss");
         private List<HJ212_Server.Model.HistoryData> _HourHistoryDatas = [];
         [ObservableProperty]
-        private string _historyDateTime_C21;
+        private string? _historyDateTime_C21;
         [ObservableProperty]
         private int _total_C21;
         [ObservableProperty]
@@ -810,7 +810,7 @@ namespace GBServerTest.ViewModel
         private string _endTime_C22 = DateTime.Now.ToString("yyyyMMddHHmmss");
         private List<HJ212_Server.Model.HistoryData> _DayHistoryDatas = [];
         [ObservableProperty]
-        private string _historyDateTime_C22;
+        private string? _historyDateTime_C22;
         [ObservableProperty]
         private int _total_C22;
         [ObservableProperty]
@@ -882,7 +882,7 @@ namespace GBServerTest.ViewModel
         private string _endTime_C23 = DateTime.Now.ToString("yyyyMMddHHmmss");
         private List<HJ212_Server.Model.RunningTimeHistory> _RunningTimeHistoryDatas = [];
         [ObservableProperty]
-        private string _historyDateTime_C23;
+        private string? _historyDateTime_C23;
         [ObservableProperty]
         private int _total_C23;
         [ObservableProperty]
@@ -971,6 +971,39 @@ namespace GBServerTest.ViewModel
                 DataTime_C24 = objects.DataTime.ToString("yyyy-MM-dd HH:mm:ss");
                 RestartTime_C24 = objects.RestartTime.ToString("yyyy-MM-dd HH:mm:ss");
             });
+        }
+        #endregion
+
+        #region C30
+        [ObservableProperty]
+        private int _timeOut_C30 = 5000;
+        [ObservableProperty]
+        private string _c30PolId = "w01018";
+        [RelayCommand]
+        private async Task C30TestAsync()
+        {
+            if (MN == null)
+            {
+                MessageBox.Show("MN空");
+                return;
+            }
+            if (PW == null)
+            {
+                MessageBox.Show("PW空");
+                return;
+            }
+            try
+            {
+                await _gb.CalibrateAsync((int)ClientId!, MN, PW, ST, C30PolId, TimeOut_C30);
+            }
+            catch (TimeoutException)
+            {
+                MessageBox.Show("请求超时");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         #endregion
     }

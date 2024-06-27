@@ -10,7 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="CSoft.LoggerNLog" Version="8.0.1" />
-    <PackageReference Include="CSoft.Protocol.HJ212_Server" Version="1.0.3" />
+    <PackageReference Include="CSoft.Protocol.HJ212_Server" Version="1.0.4" />
   </ItemGroup>
 
   <ItemGroup>
