@@ -3,7 +3,6 @@ using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using HJ212_Server;
 using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
 using System.Windows;
 
 namespace GBServerTest.ViewModel
@@ -727,6 +726,251 @@ namespace GBServerTest.ViewModel
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+        #endregion
+
+        #region C21
+        [ObservableProperty]
+        private int _timeOut_C21 = 5000;
+        [ObservableProperty]
+        private string _startTime_C21 = DateTime.Now.AddHours(-10).ToString("yyyyMMddHHmmss");
+        [ObservableProperty]
+        private string _endTime_C21 = DateTime.Now.ToString("yyyyMMddHHmmss");
+        private List<HJ212_Server.Model.HistoryData> _HourHistoryDatas = [];
+        [ObservableProperty]
+        private string _historyDateTime_C21;
+        [ObservableProperty]
+        private int _total_C21;
+        [ObservableProperty]
+        private int _index_C21;
+        partial void OnIndex_C21Changed(int value)
+        {
+            if (value > Total_C21)
+            {
+                Index_C21 = value = Total_C21;
+            }
+            if (value < 1)
+            {
+                Index_C21 = value = 1;
+            }
+            HourDatas.Clear();
+            foreach (var item in _HourHistoryDatas[value - 1].Data)
+            {
+                HourDatas.Add(item);
+            }
+            HistoryDateTime_C21 = _HourHistoryDatas[value - 1].DataTime.ToString("yyyy-MM-dd HH:mm:ss");
+        }
+
+        [RelayCommand]
+        private async Task C21TestAsync()
+        {
+            if (MN == null)
+            {
+                MessageBox.Show("MN空");
+                return;
+            }
+            if (PW == null)
+            {
+                MessageBox.Show("PW空");
+                return;
+            }
+            if (!DateTime.TryParseExact(StartTime_C21, "yyyyMMddHHmmss", null, System.Globalization.DateTimeStyles.None, out var startTime))
+            {
+                MessageBox.Show("开始时间有误");
+                return;
+            }
+            if (!DateTime.TryParseExact(EndTime_C21, "yyyyMMddHHmmss", null, System.Globalization.DateTimeStyles.None, out var endTime))
+            {
+                MessageBox.Show("结束时间有误");
+                return;
+            }
+            try
+            {
+                _HourHistoryDatas = await _gb.GetHourDataAsync((int)ClientId!, MN, PW, ST, startTime, endTime, TimeOut_C21);
+                Total_C21 = _HourHistoryDatas.Count;
+                Index_C21 = 1;
+            }
+            catch (TimeoutException)
+            {
+                MessageBox.Show("请求超时");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
+
+        #region C22
+        [ObservableProperty]
+        private int _timeOut_C22 = 5000;
+        [ObservableProperty]
+        private string _startTime_C22 = DateTime.Now.AddDays(-10).ToString("yyyyMMddHHmmss");
+        [ObservableProperty]
+        private string _endTime_C22 = DateTime.Now.ToString("yyyyMMddHHmmss");
+        private List<HJ212_Server.Model.HistoryData> _DayHistoryDatas = [];
+        [ObservableProperty]
+        private string _historyDateTime_C22;
+        [ObservableProperty]
+        private int _total_C22;
+        [ObservableProperty]
+        private int _index_C22;
+        partial void OnIndex_C22Changed(int value)
+        {
+            if (value > Total_C22)
+            {
+                Index_C22 = value = Total_C22;
+            }
+            if (value < 1)
+            {
+                Index_C22 = value = 1;
+            }
+            DayDatas.Clear();
+            foreach (var item in _DayHistoryDatas[value - 1].Data)
+            {
+                DayDatas.Add(item);
+            }
+            HistoryDateTime_C22 = _DayHistoryDatas[value - 1].DataTime.ToString("yyyy-MM-dd HH:mm:ss");
+        }
+
+        [RelayCommand]
+        private async Task C22TestAsync()
+        {
+            if (MN == null)
+            {
+                MessageBox.Show("MN空");
+                return;
+            }
+            if (PW == null)
+            {
+                MessageBox.Show("PW空");
+                return;
+            }
+            if (!DateTime.TryParseExact(StartTime_C22, "yyyyMMddHHmmss", null, System.Globalization.DateTimeStyles.None, out var startTime))
+            {
+                MessageBox.Show("开始时间有误");
+                return;
+            }
+            if (!DateTime.TryParseExact(EndTime_C22, "yyyyMMddHHmmss", null, System.Globalization.DateTimeStyles.None, out var endTime))
+            {
+                MessageBox.Show("结束时间有误");
+                return;
+            }
+            try
+            {
+                _DayHistoryDatas = await _gb.GetDayDataAsync((int)ClientId!, MN, PW, ST, startTime, endTime, TimeOut_C22);
+                Total_C22 = _DayHistoryDatas.Count;
+                Index_C22 = 1;
+            }
+            catch (TimeoutException)
+            {
+                MessageBox.Show("请求超时");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
+
+        #region C23
+        [ObservableProperty]
+        private int _timeOut_C23 = 5000;
+        [ObservableProperty]
+        private string _startTime_C23 = DateTime.Now.AddDays(-10).ToString("yyyyMMddHHmmss");
+        [ObservableProperty]
+        private string _endTime_C23 = DateTime.Now.ToString("yyyyMMddHHmmss");
+        private List<HJ212_Server.Model.RunningTimeHistory> _RunningTimeHistoryDatas = [];
+        [ObservableProperty]
+        private string _historyDateTime_C23;
+        [ObservableProperty]
+        private int _total_C23;
+        [ObservableProperty]
+        private int _index_C23;
+        partial void OnIndex_C23Changed(int value)
+        {
+            if (value > Total_C23)
+            {
+                Index_C23 = value = Total_C23;
+            }
+            if (value < 1)
+            {
+                Index_C23 = value = 1;
+            }
+            RunningTimeDatas.Clear();
+            foreach (var item in _RunningTimeHistoryDatas[value - 1].Data)
+            {
+                RunningTimeDatas.Add(item);
+            }
+            HistoryDateTime_C23 = _RunningTimeHistoryDatas[value - 1].DataTime.ToString("yyyy-MM-dd HH:mm:ss");
+        }
+        [RelayCommand]
+        private async Task C23TestAsync()
+        {
+            if (MN == null)
+            {
+                MessageBox.Show("MN空");
+                return;
+            }
+            if (PW == null)
+            {
+                MessageBox.Show("PW空");
+                return;
+            }
+            if (!DateTime.TryParseExact(StartTime_C23, "yyyyMMddHHmmss", null, System.Globalization.DateTimeStyles.None, out var startTime))
+            {
+                MessageBox.Show("开始时间有误");
+                return;
+            }
+            if (!DateTime.TryParseExact(EndTime_C23, "yyyyMMddHHmmss", null, System.Globalization.DateTimeStyles.None, out var endTime))
+            {
+                MessageBox.Show("结束时间有误");
+                return;
+            }
+            try
+            {
+                _RunningTimeHistoryDatas = await _gb.GetRunningTimeDataAsync((int)ClientId!, MN, PW, ST, startTime, endTime, TimeOut_C23);
+                Total_C23 = _RunningTimeHistoryDatas.Count;
+                Index_C23 = 1;
+            }
+            catch (TimeoutException)
+            {
+                MessageBox.Show("请求超时");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
+
+        #region C24
+        [ObservableProperty]
+        private string? _DataTime_C24;
+        [ObservableProperty]
+        private string? _RestartTime_C24;
+        [ObservableProperty]
+        private bool _C24;
+        partial void OnC24Changed(bool value)
+        {
+            if (value)
+            {
+                _gb!.OnUploadAcquisitionDeviceRestartTime -= ClientViewModel_OnUploadAcquisitionDeviceRestartTime;
+                _gb!.OnUploadAcquisitionDeviceRestartTime += ClientViewModel_OnUploadAcquisitionDeviceRestartTime;
+            }
+            else
+            {
+                _gb!.OnUploadAcquisitionDeviceRestartTime -= ClientViewModel_OnUploadAcquisitionDeviceRestartTime;
+            }
+        }
+
+        private async Task ClientViewModel_OnUploadAcquisitionDeviceRestartTime(int clientId, (DateTime DataTime, DateTime RestartTime, HJ212_Server.Model.RspInfo RspInfo) objects)
+        {
+            await App.Current.Dispatcher.InvokeAsync(() =>
+            {
+                DataTime_C24 = objects.DataTime.ToString("yyyy-MM-dd HH:mm:ss");
+                RestartTime_C24 = objects.RestartTime.ToString("yyyy-MM-dd HH:mm:ss");
+            });
         }
         #endregion
     }
