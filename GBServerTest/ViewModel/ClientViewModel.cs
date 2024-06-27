@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using HJ212_Server;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Windows;
 
 namespace GBServerTest.ViewModel
@@ -529,6 +530,203 @@ namespace GBServerTest.ViewModel
                     RunningStateDatas.Add(item);
                 }
             });
+        }
+        #endregion
+
+        #region C16
+        [ObservableProperty]
+        private ObservableCollection<HJ212_Server.Model.StatisticsData> _MinuteDatas = [];
+        [ObservableProperty]
+        private bool _C16;
+        partial void OnC16Changed(bool value)
+        {
+            if (value)
+            {
+                _gb!.OnUploadMinuteData -= ClientViewModel_OnUploadMinuteData;
+                _gb!.OnUploadMinuteData += ClientViewModel_OnUploadMinuteData; ;
+            }
+            else
+            {
+                _gb!.OnUploadMinuteData -= ClientViewModel_OnUploadMinuteData;
+            }
+        }
+
+        private async Task ClientViewModel_OnUploadMinuteData(int clientId, (DateTime DataTime, List<HJ212_Server.Model.StatisticsData> Data, HJ212_Server.Model.RspInfo RspInfo) objects)
+        {
+            await App.Current.Dispatcher.InvokeAsync(() =>
+            {
+                MinuteDatas.Clear();
+                foreach (var item in objects.Data)
+                {
+                    MinuteDatas.Add(item);
+                }
+            });
+        }
+        #endregion
+
+        #region C17
+        [ObservableProperty]
+        private ObservableCollection<HJ212_Server.Model.StatisticsData> _HourDatas = [];
+        [ObservableProperty]
+        private bool _C17;
+        partial void OnC17Changed(bool value)
+        {
+            if (value)
+            {
+                _gb!.OnUploadHourData -= ClientViewModel_OnUploadHourData;
+                _gb!.OnUploadHourData += ClientViewModel_OnUploadHourData; ; ;
+            }
+            else
+            {
+                _gb!.OnUploadHourData -= ClientViewModel_OnUploadHourData;
+            }
+        }
+
+        private async Task ClientViewModel_OnUploadHourData(int clientId, (DateTime DataTime, List<HJ212_Server.Model.StatisticsData> Data, HJ212_Server.Model.RspInfo RspInfo) objects)
+        {
+            await App.Current.Dispatcher.InvokeAsync(() =>
+            {
+                HourDatas.Clear();
+                foreach (var item in objects.Data)
+                {
+                    HourDatas.Add(item);
+                }
+            });
+        }
+        #endregion
+
+        #region C18
+        [ObservableProperty]
+        private ObservableCollection<HJ212_Server.Model.StatisticsData> _DayDatas = [];
+        [ObservableProperty]
+        private bool _C18;
+        partial void OnC18Changed(bool value)
+        {
+            if (value)
+            {
+                _gb!.OnUploadDayData -= ClientViewModel_OnUploadDayData;
+                _gb!.OnUploadDayData += ClientViewModel_OnUploadDayData; ; ;
+            }
+            else
+            {
+                _gb!.OnUploadDayData -= ClientViewModel_OnUploadDayData;
+            }
+        }
+
+        private async Task ClientViewModel_OnUploadDayData(int clientId, (DateTime DataTime, List<HJ212_Server.Model.StatisticsData> Data, HJ212_Server.Model.RspInfo RspInfo) objects)
+        {
+            await App.Current.Dispatcher.InvokeAsync(() =>
+            {
+                DayDatas.Clear();
+                foreach (var item in objects.Data)
+                {
+                    DayDatas.Add(item);
+                }
+            });
+        }
+        #endregion
+
+        #region C19
+        [ObservableProperty]
+        private ObservableCollection<HJ212_Server.Model.RunningTimeData> _RunningTimeDatas = [];
+        [ObservableProperty]
+        private bool _C19;
+        partial void OnC19Changed(bool value)
+        {
+            if (value)
+            {
+                _gb!.OnUploadRunningTimeData -= ClientViewModel_OnUploadRunningTimeData;
+                _gb!.OnUploadRunningTimeData += ClientViewModel_OnUploadRunningTimeData;
+            }
+            else
+            {
+                _gb!.OnUploadRunningTimeData -= ClientViewModel_OnUploadRunningTimeData;
+            }
+        }
+
+        private async Task ClientViewModel_OnUploadRunningTimeData(int clientId, (DateTime DataTime, List<HJ212_Server.Model.RunningTimeData> Data, HJ212_Server.Model.RspInfo RspInfo) objects)
+        {
+            await App.Current.Dispatcher.InvokeAsync(() =>
+            {
+                RunningTimeDatas.Clear();
+                foreach (var item in objects.Data)
+                {
+                    RunningTimeDatas.Add(item);
+                }
+            });
+        }
+        #endregion
+
+        #region C20
+        [ObservableProperty]
+        private int _timeOut_C20 = 5000;
+        [ObservableProperty]
+        private string _startTime_C20 = DateTime.Now.AddMinutes(-10).ToString("yyyyMMddHHmmss");
+        [ObservableProperty]
+        private string _endTime_C20 = DateTime.Now.ToString("yyyyMMddHHmmss");
+        private List<HJ212_Server.Model.HistoryData> _MinuteHistoryDatas = [];
+        [ObservableProperty]
+        private string _historyDateTime_C20;
+        [ObservableProperty]
+        private int _total_C20;
+        [ObservableProperty]
+        private int _index_C20;
+
+        partial void OnIndex_C20Changed(int value)
+        {
+            if (value > Total_C20)
+            {
+                Index_C20 = value = Total_C20;
+            }
+            if (value < 1)
+            {
+                Index_C20 = value = 1;
+            }
+            MinuteDatas.Clear();
+            foreach (var item in _MinuteHistoryDatas[value - 1].Data)
+            {
+                MinuteDatas.Add(item);
+            }
+            HistoryDateTime_C20 = _MinuteHistoryDatas[value - 1].DataTime.ToString("yyyy-MM-dd HH:mm:ss");
+        }
+
+        [RelayCommand]
+        private async Task C20TestAsync()
+        {
+            if (MN == null)
+            {
+                MessageBox.Show("MN空");
+                return;
+            }
+            if (PW == null)
+            {
+                MessageBox.Show("PW空");
+                return;
+            }
+            if (!DateTime.TryParseExact(StartTime_C20, "yyyyMMddHHmmss", null, System.Globalization.DateTimeStyles.None, out var startTime))
+            {
+                MessageBox.Show("开始时间有误");
+                return;
+            }
+            if (!DateTime.TryParseExact(EndTime_C20, "yyyyMMddHHmmss", null, System.Globalization.DateTimeStyles.None, out var endTime))
+            {
+                MessageBox.Show("结束时间有误");
+                return;
+            }
+            try
+            {
+                _MinuteHistoryDatas = await _gb.GetMinuteDataAsync((int)ClientId!, MN, PW, ST, startTime, endTime, TimeOut_C20);
+                Total_C20 = _MinuteHistoryDatas.Count;
+                Index_C20 = 1;
+            }
+            catch (TimeoutException)
+            {
+                MessageBox.Show("请求超时");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         #endregion
     }
