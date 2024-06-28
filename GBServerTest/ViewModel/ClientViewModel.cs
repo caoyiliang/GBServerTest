@@ -21,10 +21,10 @@ namespace GBServerTest.ViewModel
         private string? _log;
 
         [ObservableProperty]
-        private string? _MN = "88888888";
+        private string _MN = "88888888";
 
         [ObservableProperty]
-        private string? _PW = "123456";
+        private string _PW = "123456";
 
         [ObservableProperty]
         private IEnumerable<ST> _STs = Enum.GetValues(typeof(ST)).Cast<ST>();
@@ -60,12 +60,12 @@ namespace GBServerTest.ViewModel
         [RelayCommand]
         private async Task C1TestAsync()
         {
-            if (MN == null)
+            if (string.IsNullOrEmpty(MN))
             {
                 MessageBox.Show("MN空");
                 return;
             }
-            if (PW == null)
+            if (string.IsNullOrEmpty(PW))
             {
                 MessageBox.Show("PW空");
                 return;
@@ -95,12 +95,12 @@ namespace GBServerTest.ViewModel
         [RelayCommand]
         private async Task C2TestAsync()
         {
-            if (MN == null)
+            if (string.IsNullOrEmpty(MN))
             {
                 MessageBox.Show("MN空");
                 return;
             }
-            if (PW == null)
+            if (string.IsNullOrEmpty(PW))
             {
                 MessageBox.Show("PW空");
                 return;
@@ -130,12 +130,12 @@ namespace GBServerTest.ViewModel
         [RelayCommand]
         private async Task C3TestAsync()
         {
-            if (MN == null)
+            if (string.IsNullOrEmpty(MN))
             {
                 MessageBox.Show("MN空");
                 return;
             }
-            if (PW == null)
+            if (string.IsNullOrEmpty(PW))
             {
                 MessageBox.Show("PW空");
                 return;
@@ -190,12 +190,12 @@ namespace GBServerTest.ViewModel
         [RelayCommand]
         private async Task C5TestAsync()
         {
-            if (MN == null)
+            if (string.IsNullOrEmpty(MN))
             {
                 MessageBox.Show("MN空");
                 return;
             }
-            if (PW == null)
+            if (string.IsNullOrEmpty(PW))
             {
                 MessageBox.Show("PW空");
                 return;
@@ -221,12 +221,12 @@ namespace GBServerTest.ViewModel
         [RelayCommand]
         private async Task C6TestAsync()
         {
-            if (MN == null)
+            if (string.IsNullOrEmpty(MN))
             {
                 MessageBox.Show("MN空");
                 return;
             }
-            if (PW == null)
+            if (string.IsNullOrEmpty(PW))
             {
                 MessageBox.Show("PW空");
                 return;
@@ -254,12 +254,12 @@ namespace GBServerTest.ViewModel
         [RelayCommand]
         private async Task C7TestAsync()
         {
-            if (MN == null)
+            if (string.IsNullOrEmpty(MN))
             {
                 MessageBox.Show("MN空");
                 return;
             }
-            if (PW == null)
+            if (string.IsNullOrEmpty(PW))
             {
                 MessageBox.Show("PW空");
                 return;
@@ -285,12 +285,12 @@ namespace GBServerTest.ViewModel
         [RelayCommand]
         private async Task C8TestAsync()
         {
-            if (MN == null)
+            if (string.IsNullOrEmpty(MN))
             {
                 MessageBox.Show("MN空");
                 return;
             }
-            if (PW == null)
+            if (string.IsNullOrEmpty(PW))
             {
                 MessageBox.Show("PW空");
                 return;
@@ -318,12 +318,12 @@ namespace GBServerTest.ViewModel
         [RelayCommand]
         private async Task C9TestAsync()
         {
-            if (MN == null)
+            if (string.IsNullOrEmpty(MN))
             {
                 MessageBox.Show("MN空");
                 return;
             }
-            if (PW == null)
+            if (string.IsNullOrEmpty(PW))
             {
                 MessageBox.Show("PW空");
                 return;
@@ -350,12 +350,12 @@ namespace GBServerTest.ViewModel
         [RelayCommand]
         private async Task C10TestAsync()
         {
-            if (MN == null)
+            if (string.IsNullOrEmpty(MN))
             {
                 MessageBox.Show("MN空");
                 return;
             }
-            if (PW == null)
+            if (string.IsNullOrEmpty(PW))
             {
                 MessageBox.Show("PW空");
                 return;
@@ -381,12 +381,12 @@ namespace GBServerTest.ViewModel
         [RelayCommand]
         private async Task C11TestAsync()
         {
-            if (MN == null)
+            if (string.IsNullOrEmpty(MN))
             {
                 MessageBox.Show("MN空");
                 return;
             }
-            if (PW == null)
+            if (string.IsNullOrEmpty(PW))
             {
                 MessageBox.Show("PW空");
                 return;
@@ -412,12 +412,12 @@ namespace GBServerTest.ViewModel
         [RelayCommand]
         private async Task C12TestAsync()
         {
-            if (MN == null)
+            if (string.IsNullOrEmpty(MN))
             {
                 MessageBox.Show("MN空");
                 return;
             }
-            if (PW == null)
+            if (string.IsNullOrEmpty(PW))
             {
                 MessageBox.Show("PW空");
                 return;
@@ -443,12 +443,12 @@ namespace GBServerTest.ViewModel
         [RelayCommand]
         private async Task C13TestAsync()
         {
-            if (MN == null)
+            if (string.IsNullOrEmpty(MN))
             {
                 MessageBox.Show("MN空");
                 return;
             }
-            if (PW == null)
+            if (string.IsNullOrEmpty(PW))
             {
                 MessageBox.Show("PW空");
                 return;
@@ -684,12 +684,12 @@ namespace GBServerTest.ViewModel
         [RelayCommand]
         private async Task C20TestAsync()
         {
-            if (MN == null)
+            if (string.IsNullOrEmpty(MN))
             {
                 MessageBox.Show("MN空");
                 return;
             }
-            if (PW == null)
+            if (string.IsNullOrEmpty(PW))
             {
                 MessageBox.Show("PW空");
                 return;
@@ -756,12 +756,12 @@ namespace GBServerTest.ViewModel
         [RelayCommand]
         private async Task C21TestAsync()
         {
-            if (MN == null)
+            if (string.IsNullOrEmpty(MN))
             {
                 MessageBox.Show("MN空");
                 return;
             }
-            if (PW == null)
+            if (string.IsNullOrEmpty(PW))
             {
                 MessageBox.Show("PW空");
                 return;
@@ -828,12 +828,12 @@ namespace GBServerTest.ViewModel
         [RelayCommand]
         private async Task C22TestAsync()
         {
-            if (MN == null)
+            if (string.IsNullOrEmpty(MN))
             {
                 MessageBox.Show("MN空");
                 return;
             }
-            if (PW == null)
+            if (string.IsNullOrEmpty(PW))
             {
                 MessageBox.Show("PW空");
                 return;
@@ -899,12 +899,12 @@ namespace GBServerTest.ViewModel
         [RelayCommand]
         private async Task C23TestAsync()
         {
-            if (MN == null)
+            if (string.IsNullOrEmpty(MN))
             {
                 MessageBox.Show("MN空");
                 return;
             }
-            if (PW == null)
+            if (string.IsNullOrEmpty(PW))
             {
                 MessageBox.Show("PW空");
                 return;
@@ -973,12 +973,12 @@ namespace GBServerTest.ViewModel
         [RelayCommand]
         private async Task C30TestAsync()
         {
-            if (MN == null)
+            if (string.IsNullOrEmpty(MN))
             {
                 MessageBox.Show("MN空");
                 return;
             }
-            if (PW == null)
+            if (string.IsNullOrEmpty(PW))
             {
                 MessageBox.Show("PW空");
                 return;
@@ -1006,12 +1006,12 @@ namespace GBServerTest.ViewModel
         [RelayCommand]
         private async Task C31TestAsync()
         {
-            if (MN == null)
+            if (string.IsNullOrEmpty(MN))
             {
                 MessageBox.Show("MN空");
                 return;
             }
-            if (PW == null)
+            if (string.IsNullOrEmpty(PW))
             {
                 MessageBox.Show("PW空");
                 return;
@@ -1039,12 +1039,12 @@ namespace GBServerTest.ViewModel
         [RelayCommand]
         private async Task C32TestAsync()
         {
-            if (MN == null)
+            if (string.IsNullOrEmpty(MN))
             {
                 MessageBox.Show("MN空");
                 return;
             }
-            if (PW == null)
+            if (string.IsNullOrEmpty(PW))
             {
                 MessageBox.Show("PW空");
                 return;
@@ -1072,12 +1072,12 @@ namespace GBServerTest.ViewModel
         [RelayCommand]
         private async Task C33TestAsync()
         {
-            if (MN == null)
+            if (string.IsNullOrEmpty(MN))
             {
                 MessageBox.Show("MN空");
                 return;
             }
-            if (PW == null)
+            if (string.IsNullOrEmpty(PW))
             {
                 MessageBox.Show("PW空");
                 return;
@@ -1107,12 +1107,12 @@ namespace GBServerTest.ViewModel
         [RelayCommand]
         private async Task C34TestAsync()
         {
-            if (MN == null)
+            if (string.IsNullOrEmpty(MN))
             {
                 MessageBox.Show("MN空");
                 return;
             }
-            if (PW == null)
+            if (string.IsNullOrEmpty(PW))
             {
                 MessageBox.Show("PW空");
                 return;
@@ -1146,12 +1146,12 @@ namespace GBServerTest.ViewModel
         [RelayCommand]
         private async Task C35TestAsync()
         {
-            if (MN == null)
+            if (string.IsNullOrEmpty(MN))
             {
                 MessageBox.Show("MN空");
                 return;
             }
-            if (PW == null)
+            if (string.IsNullOrEmpty(PW))
             {
                 MessageBox.Show("PW空");
                 return;
@@ -1188,12 +1188,12 @@ namespace GBServerTest.ViewModel
         [RelayCommand]
         private async Task C36TestAsync()
         {
-            if (MN == null)
+            if (string.IsNullOrEmpty(MN))
             {
                 MessageBox.Show("MN空");
                 return;
             }
-            if (PW == null)
+            if (string.IsNullOrEmpty(PW))
             {
                 MessageBox.Show("PW空");
                 return;
@@ -1225,12 +1225,12 @@ namespace GBServerTest.ViewModel
         [RelayCommand]
         private async Task C37TestAsync()
         {
-            if (MN == null)
+            if (string.IsNullOrEmpty(MN))
             {
                 MessageBox.Show("MN空");
                 return;
             }
-            if (PW == null)
+            if (string.IsNullOrEmpty(PW))
             {
                 MessageBox.Show("PW空");
                 return;
@@ -1260,12 +1260,12 @@ namespace GBServerTest.ViewModel
         [RelayCommand]
         private async Task C38TestAsync()
         {
-            if (MN == null)
+            if (string.IsNullOrEmpty(MN))
             {
                 MessageBox.Show("MN空");
                 return;
             }
-            if (PW == null)
+            if (string.IsNullOrEmpty(PW))
             {
                 MessageBox.Show("PW空");
                 return;
@@ -1343,6 +1343,203 @@ namespace GBServerTest.ViewModel
                 PolId_C40 = objects.PolId;
                 Info_C40 = objects.Log;
             });
+        }
+        #endregion
+
+        #region C41
+        [ObservableProperty]
+        private int _timeOut_C41 = 5000;
+        [ObservableProperty]
+        private string _startTime_C41 = DateTime.Now.AddMinutes(-10).ToString("yyyyMMddHHmmss");
+        [ObservableProperty]
+        private string _endTime_C41 = DateTime.Now.ToString("yyyyMMddHHmmss");
+        [ObservableProperty]
+        private string _polId_C41 = "w01018";
+        [ObservableProperty]
+        private ObservableCollection<HJ212_Server.Model.LogInfo> _LogInfos = [];
+        [RelayCommand]
+        private async Task C41TestAsync()
+        {
+            if (string.IsNullOrEmpty(MN))
+            {
+                MessageBox.Show("MN空");
+                return;
+            }
+            if (string.IsNullOrEmpty(PW))
+            {
+                MessageBox.Show("PW空");
+                return;
+            }
+            if (!DateTime.TryParseExact(StartTime_C41, "yyyyMMddHHmmss", null, System.Globalization.DateTimeStyles.None, out var startTime))
+            {
+                MessageBox.Show("开始时间有误");
+                return;
+            }
+            if (!DateTime.TryParseExact(EndTime_C41, "yyyyMMddHHmmss", null, System.Globalization.DateTimeStyles.None, out var endTime))
+            {
+                MessageBox.Show("结束时间有误");
+                return;
+            }
+            try
+            {
+                var rs = await _gb.GetLogInfosAsync(ClientId, MN, PW, ST, PolId_C41, startTime, endTime, TimeOut_C41);
+                LogInfos.Clear();
+                foreach (var item in rs)
+                {
+                    LogInfos.Add(item);
+                }
+            }
+            catch (TimeoutException)
+            {
+                MessageBox.Show("请求超时");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
+
+        #region C42
+        [ObservableProperty]
+        private string? _DataTime_C42;
+        [ObservableProperty]
+        private string? _polId_C42;
+        [ObservableProperty]
+        private ObservableCollection<HJ212_Server.Model.DeviceInfo> _DeviceInfos = [];
+        [ObservableProperty]
+        private bool _C42;
+        partial void OnC42Changed(bool value)
+        {
+            if (value)
+            {
+                _gb!.OnUploadInfo += ClientViewModel_OnUploadInfo;
+            }
+            else
+            {
+                _gb!.OnUploadInfo -= ClientViewModel_OnUploadInfo;
+            }
+        }
+
+        private async Task ClientViewModel_OnUploadInfo(Guid clientId, (DateTime DataTime, string PolId, List<HJ212_Server.Model.DeviceInfo> DeviceInfos, HJ212_Server.Model.RspInfo RspInfo) objects)
+        {
+            await App.Current.Dispatcher.InvokeAsync(() =>
+            {
+                DataTime_C42 = objects.DataTime.ToString("yyyy-MM-dd HH:mm:ss");
+                PolId_C42 = objects.PolId;
+                DeviceInfos.Clear();
+                foreach (var item in objects.DeviceInfos)
+                {
+                    DeviceInfos.Add(item);
+                }
+            });
+        }
+        #endregion
+
+        #region C43
+        [ObservableProperty]
+        private int _timeOut_C43 = 5000;
+        [ObservableProperty]
+        private string _polId_C43 = "w01018";
+        [ObservableProperty]
+        private string? _Info_C43;
+        [RelayCommand]
+        private async Task C43TestAsync()
+        {
+            if (string.IsNullOrEmpty(MN))
+            {
+                MessageBox.Show("MN空");
+                return;
+            }
+            if (string.IsNullOrEmpty(PW))
+            {
+                MessageBox.Show("PW空");
+                return;
+            }
+            try
+            {
+                Info_C43 = await _gb.GetStateInfoAsync(ClientId, MN, PW, ST, PolId_C43, TimeOut_C43);
+            }
+            catch (TimeoutException)
+            {
+                MessageBox.Show("请求超时");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
+
+        #region C45
+        [ObservableProperty]
+        private int _timeOut_C45 = 5000;
+        [ObservableProperty]
+        private string _polId_C45 = "w01018";
+        [ObservableProperty]
+        private string? _Info_C45;
+        [RelayCommand]
+        private async Task C45TestAsync()
+        {
+            if (string.IsNullOrEmpty(MN))
+            {
+                MessageBox.Show("MN空");
+                return;
+            }
+            if (string.IsNullOrEmpty(PW))
+            {
+                MessageBox.Show("PW空");
+                return;
+            }
+            try
+            {
+                Info_C45 = await _gb.GetArgumentInfoAsync(ClientId, MN, PW, ST, PolId_C45, TimeOut_C45);
+            }
+            catch (TimeoutException)
+            {
+                MessageBox.Show("请求超时");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
+
+        #region C46
+        [ObservableProperty]
+        private int _timeOut_C46 = 5000;
+        [ObservableProperty]
+        private string _polId_C46 = "w01018";
+        [ObservableProperty]
+        private string _InfoId_C46 = "";
+        [ObservableProperty]
+        private string _Info_C46 = "";
+        [RelayCommand]
+        private async Task C46TestAsync()
+        {
+            if (string.IsNullOrEmpty(MN))
+            {
+                MessageBox.Show("MN空");
+                return;
+            }
+            if (string.IsNullOrEmpty(PW))
+            {
+                MessageBox.Show("PW空");
+                return;
+            }
+            try
+            {
+                await _gb.SetInfoAsync(ClientId, MN, PW, ST, PolId_C46, InfoId_C46, Info_C46, TimeOut_C46);
+            }
+            catch (TimeoutException)
+            {
+                MessageBox.Show("请求超时");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         #endregion
     }

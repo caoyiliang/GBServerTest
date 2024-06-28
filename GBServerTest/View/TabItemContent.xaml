@@ -440,14 +440,84 @@
                         </StackPanel>
                     </Expander>
                     <Expander Header="C40 上传现场机信息（日志）">
-                        <StackPanel Background="#FFE5E5E5" Height="280">
+                        <StackPanel Background="#FFE5E5E5" Height="180">
                             <CheckBox Content="启用" Margin="5" IsChecked="{Binding C40}"/>
                             <TextBlock Text="DataTime :" Margin="5"/>
-                            <TextBox Text="{Binding DataTime_C40}" Margin="5,0"/>
+                            <TextBox Text="{Binding DataTime_C40}" IsReadOnly="True" Margin="5,0"/>
                             <TextBlock Text="仪表对应污染物编码 :" Margin="5"/>
-                            <TextBox Text="{Binding PolId_C40}" Margin="5,0"/>
+                            <TextBox Text="{Binding PolId_C40}" IsReadOnly="True" Margin="5,0"/>
                             <TextBlock Text="日志信息 :" Margin="5"/>
-                            <TextBox Text="{Binding Info_C40}" Margin="5,0"/>
+                            <TextBox Text="{Binding Info_C40}" IsReadOnly="True"  Margin="5,0"/>
+                        </StackPanel>
+                    </Expander>
+                    <Expander Header="C41 提取现场机信息（日志）">
+                        <StackPanel Background="#FFE5E5E5" Height="450">
+                            <TextBlock Text="起始时间 :" Margin="5"/>
+                            <TextBox Text="{Binding StartTime_C41}" Margin="5,0"/>
+                            <TextBlock Text="结束时间 :" Margin="5"/>
+                            <TextBox Text="{Binding EndTime_C41}" Margin="5,0"/>
+                            <TextBlock Text="仪表对应污染物编码 :" Margin="5"/>
+                            <TextBox Text="{Binding PolId_C41}" Margin="5,0"/>
+                            <TextBlock Text="响应超时_测试用非下发参数（毫秒） :" Margin="5"/>
+                            <TextBox Text="{Binding TimeOut_C41}" Margin="5,0"/>
+                            <Button Content="提取" Margin="5" Command="{Binding C41TestCommand}"/>
+                            <DataGrid Height="200" Margin="5" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding LogInfos}">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="时间" Binding="{Binding DataTime}" Width="*"/>
+                                    <DataGridTextColumn Header="污染物名称" Binding="{Binding PolId}" Width="*"/>
+                                    <DataGridTextColumn Header="内容 " Binding="{Binding Info}" Width="*"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </StackPanel>
+                    </Expander>
+                    <Expander Header="C42 上传现场机信息（状态）(C44上传现场机信息（参数） 同)">
+                        <StackPanel Background="#FFE5E5E5" Height="350">
+                            <CheckBox Content="启用" Margin="5" IsChecked="{Binding C42}"/>
+                            <TextBlock Text="DataTime :" Margin="5"/>
+                            <TextBox Text="{Binding DataTime_C42}" IsReadOnly="True" Margin="5,0"/>
+                            <TextBlock Text="仪表对应污染物编码 :" Margin="5"/>
+                            <TextBox Text="{Binding PolId_C42}" IsReadOnly="True" Margin="5,0"/>
+                            <DataGrid Height="200" Margin="5" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding DeviceInfos}">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="InfoId" Binding="{Binding InfoId}" Width="*"/>
+                                    <DataGridTextColumn Header="Info " Binding="{Binding Info}" Width="*"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </StackPanel>
+                    </Expander>
+                    <Expander Header="C43 提取现场机信息（状态）">
+                        <StackPanel Background="#FFE5E5E5" Height="180">
+                            <TextBlock Text="仪表对应污染物编码 :" Margin="5"/>
+                            <TextBox Text="{Binding PolId_C43}" Margin="5,0"/>
+                            <TextBlock Text="响应超时_测试用非下发参数（毫秒） :" Margin="5"/>
+                            <TextBox Text="{Binding TimeOut_C43}" Margin="5,0"/>
+                            <Button Content="提取" Margin="5" Command="{Binding C43TestCommand}"/>
+                            <TextBlock Text="现场机信息 :" Margin="5"/>
+                            <TextBox Text="{Binding Info_C43}" IsReadOnly="True" Margin="5,0"/>
+                        </StackPanel>
+                    </Expander>
+                    <Expander Header="C45 提取现场机信息（参数）">
+                        <StackPanel Background="#FFE5E5E5" Height="180">
+                            <TextBlock Text="仪表对应污染物编码 :" Margin="5"/>
+                            <TextBox Text="{Binding PolId_C45}" Margin="5,0"/>
+                            <TextBlock Text="响应超时_测试用非下发参数（毫秒） :" Margin="5"/>
+                            <TextBox Text="{Binding TimeOut_C45}" Margin="5,0"/>
+                            <Button Content="提取" Margin="5" Command="{Binding C45TestCommand}"/>
+                            <TextBlock Text="现场机信息 :" Margin="5"/>
+                            <TextBox Text="{Binding Info_C45}" IsReadOnly="True" Margin="5,0"/>
+                        </StackPanel>
+                    </Expander>
+                    <Expander Header="C46 设置现场机参数">
+                        <StackPanel Background="#FFE5E5E5" Height="260">
+                            <TextBlock Text="仪表对应污染物编码 :" Margin="5"/>
+                            <TextBox Text="{Binding PolId_C46}" Margin="5,0"/>
+                            <TextBlock Text="现场机信息编码 :" Margin="5"/>
+                            <TextBox Text="{Binding InfoId_C46}" Margin="5,0"/>
+                            <TextBlock Text="Info :" Margin="5"/>
+                            <TextBox Text="{Binding Info_C46}" Margin="5,0"/>
+                            <TextBlock Text="响应超时_测试用非下发参数（毫秒） :" Margin="5"/>
+                            <TextBox Text="{Binding TimeOut_C46}" Margin="5,0"/>
+                            <Button Content="提取" Margin="5" Command="{Binding C46TestCommand}"/>
                         </StackPanel>
                     </Expander>
                 </StackPanel>

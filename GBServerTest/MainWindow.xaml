@@ -8,7 +8,7 @@
         xmlns:view="clr-namespace:GBServerTest.View"
         xmlns:viewmodel="clr-namespace:GBServerTest.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="国标协议测试-服务端" Height="450" Width="800">
     <Window.Resources>
         <convert:StatusConverter x:Key="StatusConverter"/>
         <convert:TabItemStateConverter x:Key="TabItemStateConverter"/>
