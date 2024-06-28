@@ -395,6 +395,61 @@
                             <Button Content="发送" Margin="5" Command="{Binding C35TestCommand}"/>
                         </StackPanel>
                     </Expander>
+                    <Expander Header="C36 提取采样时间周期">
+                        <StackPanel Background="#FFE5E5E5" Height="220">
+                            <TextBlock Text="对应污染物编码:" Margin="5"/>
+                            <TextBox Text="{Binding C36PolId}" Margin="5,0"/>
+                            <TextBlock Text="响应超时_测试用非下发参数（毫秒） :" Margin="5"/>
+                            <TextBox Text="{Binding TimeOut_C36}" Margin="5,0"/>
+                            <Button Content="提取" Margin="5" Command="{Binding C36TestCommand}"/>
+                            <TextBlock Text="采样起始时间:" Margin="5"/>
+                            <TextBox Text="{Binding CstartTime_C36}" IsReadOnly="True" Margin="5,0"/>
+                            <TextBlock Text="采样时间间隔，单位：小时:" Margin="5"/>
+                            <TextBox Text="{Binding Ctime_C36}" IsReadOnly="True" Margin="5,0"/>
+                        </StackPanel>
+                    </Expander>
+                    <Expander Header="C37 提取出样时间">
+                        <StackPanel Background="#FFE5E5E5" Height="200">
+                            <TextBlock Text="对应污染物编码:" Margin="5"/>
+                            <TextBox Text="{Binding C37PolId}" Margin="5,0"/>
+                            <TextBlock Text="响应超时_测试用非下发参数（毫秒） :" Margin="5"/>
+                            <TextBox Text="{Binding TimeOut_C37}" Margin="5,0"/>
+                            <Button Content="提取" Margin="5" Command="{Binding C37TestCommand}"/>
+                            <TextBlock Text="出样时间间隔，单位：分钟:" Margin="5"/>
+                            <TextBox Text="{Binding Stime_C37}" IsReadOnly="True" Margin="5,0"/>
+                        </StackPanel>
+                    </Expander>
+                    <Expander Header="C38 提取设备唯一标识">
+                        <StackPanel Background="#FFE5E5E5" Height="200">
+                            <TextBlock Text="对应污染物编码:" Margin="5"/>
+                            <TextBox Text="{Binding C38PolId}" Margin="5,0"/>
+                            <TextBlock Text="响应超时_测试用非下发参数（毫秒） :" Margin="5"/>
+                            <TextBox Text="{Binding TimeOut_C38}" Margin="5,0"/>
+                            <Button Content="提取" Margin="5" Command="{Binding C38TestCommand}"/>
+                            <TextBlock Text="设备唯一标识:" Margin="5"/>
+                            <TextBox Text="{Binding SN_C38}" IsReadOnly="True" Margin="5,0"/>
+                        </StackPanel>
+                    </Expander>
+                    <Expander Header="C39 上传设备唯一标识">
+                        <StackPanel Background="#FFE5E5E5" Height="250">
+                            <CheckBox Content="启用" Margin="5" IsChecked="{Binding C39}"/>
+                            <TextBlock Text="仪表对应污染物编码 :" Margin="5"/>
+                            <TextBox Text="{Binding PolId_C39}" Margin="5,0"/>
+                            <TextBlock Text="设备唯一标识 :" Margin="5"/>
+                            <TextBox Text="{Binding SN_C39}" Margin="5,0"/>
+                        </StackPanel>
+                    </Expander>
+                    <Expander Header="C40 上传现场机信息（日志）">
+                        <StackPanel Background="#FFE5E5E5" Height="280">
+                            <CheckBox Content="启用" Margin="5" IsChecked="{Binding C40}"/>
+                            <TextBlock Text="DataTime :" Margin="5"/>
+                            <TextBox Text="{Binding DataTime_C40}" Margin="5,0"/>
+                            <TextBlock Text="仪表对应污染物编码 :" Margin="5"/>
+                            <TextBox Text="{Binding PolId_C40}" Margin="5,0"/>
+                            <TextBlock Text="日志信息 :" Margin="5"/>
+                            <TextBox Text="{Binding Info_C40}" Margin="5,0"/>
+                        </StackPanel>
+                    </Expander>
                 </StackPanel>
             </ScrollViewer>
             <StackPanel Orientation="Horizontal" Grid.Row="1">

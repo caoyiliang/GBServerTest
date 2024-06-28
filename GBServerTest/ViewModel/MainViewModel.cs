@@ -45,7 +45,7 @@ namespace GBServerTest.ViewModel
             {
                 await App.Current.Dispatcher.InvokeAsync(() =>
                 {
-                    TabItems.Remove(TabItems.Where(_ => _.Guid == m.Value).First());
+                    TabItems.Remove(TabItems.Where(_ => _.ClientId == m.Value).First());
                 });
             });
         }
@@ -84,15 +84,14 @@ namespace GBServerTest.ViewModel
             }
         }
 
-        private async Task Gb_OnClientDisconnect(int clientId)
+        private async Task Gb_OnClientDisconnect(Guid clientId)
         {
             var client = TabItems.Where(x => x.ClientId == clientId).First();
             client.IsConnect = false;
-            client.ClientId = null;
             await Task.CompletedTask;
         }
 
-        private async Task Gb_OnClientConnect(int clientId)
+        private async Task Gb_OnClientConnect(Guid clientId)
         {
             string info = (await _gb!.GetClientInfos(clientId))!;
             var clientInfo = new ClientViewModel(_gb, clientId, info) { IsConnect = true };
@@ -102,13 +101,13 @@ namespace GBServerTest.ViewModel
             });
         }
 
-        private async Task Gb_OnReceivedData(int clientId, byte[] data)
+        private async Task Gb_OnReceivedData(Guid clientId, byte[] data)
         {
             TabItems.Where(x => x.ClientId == clientId).First().Log += $"{DateTime.Now:yyyy-MM-dd HH:mm:ss:fff} GB Rec:<-- {Encoding.UTF8.GetString(data)}";
             await Task.CompletedTask;
         }
 
-        private async Task Gb_OnSentData(int clientId, byte[] data)
+        private async Task Gb_OnSentData(Guid clientId, byte[] data)
         {
             TabItems.Where(x => x.ClientId == clientId).First().Log += $"{DateTime.Now:yyyy-MM-dd HH:mm:ss:fff} GB Send:<-- {Encoding.UTF8.GetString(data)}";
             await Task.CompletedTask;

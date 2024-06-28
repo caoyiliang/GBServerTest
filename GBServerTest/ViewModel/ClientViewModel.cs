@@ -7,13 +7,12 @@ using System.Windows;
 
 namespace GBServerTest.ViewModel
 {
-    public partial class ClientViewModel(IGB_Server gb, int clientId, string ip) : ObservableObject
+    public partial class ClientViewModel(IGB_Server gb, Guid clientId, string ip) : ObservableObject
     {
         private readonly IGB_Server _gb = gb;
-        public Guid Guid { get; } = Guid.NewGuid();
 
         [ObservableProperty]
-        private int? _clientId = clientId;
+        private Guid _clientId = clientId;
 
         [ObservableProperty]
         private string _ip = ip;
@@ -52,7 +51,7 @@ namespace GBServerTest.ViewModel
         [RelayCommand]
         private void Close()
         {
-            WeakReferenceMessenger.Default.Send(new CloseTabItemMessage(Guid));
+            WeakReferenceMessenger.Default.Send(new CloseTabItemMessage(ClientId));
         }
 
         #region C1
@@ -73,7 +72,7 @@ namespace GBServerTest.ViewModel
             }
             try
             {
-                await _gb.SetTimeoutAndRetryAsync((int)ClientId!, MN, PW, ST, OverTime, ReCount, TimeOut_C1);
+                await _gb.SetTimeoutAndRetryAsync(ClientId, MN, PW, ST, OverTime, ReCount, TimeOut_C1);
             }
             catch (TimeoutException)
             {
@@ -108,7 +107,7 @@ namespace GBServerTest.ViewModel
             }
             try
             {
-                SystemTime = (await _gb.GetSystemTimeAsync((int)ClientId!, MN, PW, ST, C2PolId, TimeOut_C2)).ToString("yyyy-MM-dd HH:mm:ss");
+                SystemTime = (await _gb.GetSystemTimeAsync(ClientId, MN, PW, ST, C2PolId, TimeOut_C2)).ToString("yyyy-MM-dd HH:mm:ss");
             }
             catch (TimeoutException)
             {
@@ -148,7 +147,7 @@ namespace GBServerTest.ViewModel
             }
             try
             {
-                await _gb.SetSystemTimeAsync((int)ClientId!, MN, PW, ST, C3PolId, systemTime, TimeOut_C3);
+                await _gb.SetSystemTimeAsync(ClientId, MN, PW, ST, C3PolId, systemTime, TimeOut_C3);
             }
             catch (TimeoutException)
             {
@@ -168,7 +167,6 @@ namespace GBServerTest.ViewModel
         {
             if (value)
             {
-                _gb!.OnAskSetSystemTime -= ClientViewModel_OnAskSetSystemTime;
                 _gb!.OnAskSetSystemTime += ClientViewModel_OnAskSetSystemTime;
             }
             else
@@ -177,7 +175,7 @@ namespace GBServerTest.ViewModel
             }
         }
 
-        private async Task ClientViewModel_OnAskSetSystemTime(int clientId, (string PolId, HJ212_Server.Model.RspInfo RspInfo) objects)
+        private async Task ClientViewModel_OnAskSetSystemTime(Guid clientId, (string PolId, HJ212_Server.Model.RspInfo RspInfo) objects)
         {
             MessageBox.Show($"PolId:{objects.PolId} 请求设置系统时间");
             await Task.CompletedTask;
@@ -204,7 +202,7 @@ namespace GBServerTest.ViewModel
             }
             try
             {
-                RtdInterval = await _gb.GetRealTimeDataIntervalAsync((int)ClientId!, MN, PW, ST, TimeOut_C5);
+                RtdInterval = await _gb.GetRealTimeDataIntervalAsync(ClientId, MN, PW, ST, TimeOut_C5);
             }
             catch (TimeoutException)
             {
@@ -235,7 +233,7 @@ namespace GBServerTest.ViewModel
             }
             try
             {
-                await _gb.SetRealTimeDataIntervalAsync((int)ClientId!, MN, PW, ST, RtdInterval ?? 0, TimeOut_C6);
+                await _gb.SetRealTimeDataIntervalAsync(ClientId, MN, PW, ST, RtdInterval ?? 0, TimeOut_C6);
             }
             catch (TimeoutException)
             {
@@ -268,7 +266,7 @@ namespace GBServerTest.ViewModel
             }
             try
             {
-                MinInterval = await _gb.GetMinuteDataIntervalAsync((int)ClientId!, MN, PW, ST, TimeOut_C7);
+                MinInterval = await _gb.GetMinuteDataIntervalAsync(ClientId, MN, PW, ST, TimeOut_C7);
             }
             catch (TimeoutException)
             {
@@ -299,7 +297,7 @@ namespace GBServerTest.ViewModel
             }
             try
             {
-                await _gb.SetMinuteDataIntervalAsync((int)ClientId!, MN, PW, ST, MinInterval ?? 0, TimeOut_C8);
+                await _gb.SetMinuteDataIntervalAsync(ClientId, MN, PW, ST, MinInterval ?? 0, TimeOut_C8);
             }
             catch (TimeoutException)
             {
@@ -332,7 +330,7 @@ namespace GBServerTest.ViewModel
             }
             try
             {
-                await _gb.SetNewPWAsync((int)ClientId!, MN, PW, ST, NewPW, TimeOut_C9);
+                await _gb.SetNewPWAsync(ClientId, MN, PW, ST, NewPW, TimeOut_C9);
                 PW = NewPW;
             }
             catch (TimeoutException)
@@ -364,7 +362,7 @@ namespace GBServerTest.ViewModel
             }
             try
             {
-                await _gb.StartRealTimeDataAsync((int)ClientId!, MN, PW, ST, TimeOut_C10);
+                await _gb.StartRealTimeDataAsync(ClientId, MN, PW, ST, TimeOut_C10);
             }
             catch (TimeoutException)
             {
@@ -395,7 +393,7 @@ namespace GBServerTest.ViewModel
             }
             try
             {
-                await _gb.StopRealTimeDataAsync((int)ClientId!, MN, PW, ST, TimeOut_C11);
+                await _gb.StopRealTimeDataAsync(ClientId, MN, PW, ST, TimeOut_C11);
             }
             catch (TimeoutException)
             {
@@ -426,7 +424,7 @@ namespace GBServerTest.ViewModel
             }
             try
             {
-                await _gb.StartRunningStateDataAsync((int)ClientId!, MN, PW, ST, TimeOut_C12);
+                await _gb.StartRunningStateDataAsync(ClientId, MN, PW, ST, TimeOut_C12);
             }
             catch (TimeoutException)
             {
@@ -457,7 +455,7 @@ namespace GBServerTest.ViewModel
             }
             try
             {
-                await _gb.StopRunningStateDataAsync((int)ClientId!, MN, PW, ST, TimeOut_C13);
+                await _gb.StopRunningStateDataAsync(ClientId, MN, PW, ST, TimeOut_C13);
             }
             catch (TimeoutException)
             {
@@ -479,7 +477,6 @@ namespace GBServerTest.ViewModel
         {
             if (value)
             {
-                _gb!.OnUploadRealTimeData -= ClientViewModel_OnUploadRealTimeData;
                 _gb!.OnUploadRealTimeData += ClientViewModel_OnUploadRealTimeData;
             }
             else
@@ -488,7 +485,7 @@ namespace GBServerTest.ViewModel
             }
         }
 
-        private async Task ClientViewModel_OnUploadRealTimeData(int clientId, (DateTime DataTime, List<HJ212_Server.Model.RealTimeData> Data, HJ212_Server.Model.RspInfo RspInfo) objects)
+        private async Task ClientViewModel_OnUploadRealTimeData(Guid clientId, (DateTime DataTime, List<HJ212_Server.Model.RealTimeData> Data, HJ212_Server.Model.RspInfo RspInfo) objects)
         {
             await App.Current.Dispatcher.InvokeAsync(() =>
             {
@@ -510,8 +507,7 @@ namespace GBServerTest.ViewModel
         {
             if (value)
             {
-                _gb!.OnUploadRunningStateData -= ClientViewModel_OnUploadRunningStateData;
-                _gb!.OnUploadRunningStateData += ClientViewModel_OnUploadRunningStateData; ;
+                _gb!.OnUploadRunningStateData += ClientViewModel_OnUploadRunningStateData;
             }
             else
             {
@@ -519,7 +515,7 @@ namespace GBServerTest.ViewModel
             }
         }
 
-        private async Task ClientViewModel_OnUploadRunningStateData(int clientId, (DateTime DataTime, List<HJ212_Server.Model.RunningStateData> Data, HJ212_Server.Model.RspInfo RspInfo) objects)
+        private async Task ClientViewModel_OnUploadRunningStateData(Guid clientId, (DateTime DataTime, List<HJ212_Server.Model.RunningStateData> Data, HJ212_Server.Model.RspInfo RspInfo) objects)
         {
             await App.Current.Dispatcher.InvokeAsync(() =>
             {
@@ -541,8 +537,7 @@ namespace GBServerTest.ViewModel
         {
             if (value)
             {
-                _gb!.OnUploadMinuteData -= ClientViewModel_OnUploadMinuteData;
-                _gb!.OnUploadMinuteData += ClientViewModel_OnUploadMinuteData; ;
+                _gb!.OnUploadMinuteData += ClientViewModel_OnUploadMinuteData;
             }
             else
             {
@@ -550,7 +545,7 @@ namespace GBServerTest.ViewModel
             }
         }
 
-        private async Task ClientViewModel_OnUploadMinuteData(int clientId, (DateTime DataTime, List<HJ212_Server.Model.StatisticsData> Data, HJ212_Server.Model.RspInfo RspInfo) objects)
+        private async Task ClientViewModel_OnUploadMinuteData(Guid clientId, (DateTime DataTime, List<HJ212_Server.Model.StatisticsData> Data, HJ212_Server.Model.RspInfo RspInfo) objects)
         {
             await App.Current.Dispatcher.InvokeAsync(() =>
             {
@@ -572,8 +567,7 @@ namespace GBServerTest.ViewModel
         {
             if (value)
             {
-                _gb!.OnUploadHourData -= ClientViewModel_OnUploadHourData;
-                _gb!.OnUploadHourData += ClientViewModel_OnUploadHourData; ; ;
+                _gb!.OnUploadHourData += ClientViewModel_OnUploadHourData;
             }
             else
             {
@@ -581,7 +575,7 @@ namespace GBServerTest.ViewModel
             }
         }
 
-        private async Task ClientViewModel_OnUploadHourData(int clientId, (DateTime DataTime, List<HJ212_Server.Model.StatisticsData> Data, HJ212_Server.Model.RspInfo RspInfo) objects)
+        private async Task ClientViewModel_OnUploadHourData(Guid clientId, (DateTime DataTime, List<HJ212_Server.Model.StatisticsData> Data, HJ212_Server.Model.RspInfo RspInfo) objects)
         {
             await App.Current.Dispatcher.InvokeAsync(() =>
             {
@@ -603,8 +597,7 @@ namespace GBServerTest.ViewModel
         {
             if (value)
             {
-                _gb!.OnUploadDayData -= ClientViewModel_OnUploadDayData;
-                _gb!.OnUploadDayData += ClientViewModel_OnUploadDayData; ; ;
+                _gb!.OnUploadDayData += ClientViewModel_OnUploadDayData;
             }
             else
             {
@@ -612,7 +605,7 @@ namespace GBServerTest.ViewModel
             }
         }
 
-        private async Task ClientViewModel_OnUploadDayData(int clientId, (DateTime DataTime, List<HJ212_Server.Model.StatisticsData> Data, HJ212_Server.Model.RspInfo RspInfo) objects)
+        private async Task ClientViewModel_OnUploadDayData(Guid clientId, (DateTime DataTime, List<HJ212_Server.Model.StatisticsData> Data, HJ212_Server.Model.RspInfo RspInfo) objects)
         {
             await App.Current.Dispatcher.InvokeAsync(() =>
             {
@@ -634,7 +627,6 @@ namespace GBServerTest.ViewModel
         {
             if (value)
             {
-                _gb!.OnUploadRunningTimeData -= ClientViewModel_OnUploadRunningTimeData;
                 _gb!.OnUploadRunningTimeData += ClientViewModel_OnUploadRunningTimeData;
             }
             else
@@ -643,7 +635,7 @@ namespace GBServerTest.ViewModel
             }
         }
 
-        private async Task ClientViewModel_OnUploadRunningTimeData(int clientId, (DateTime DataTime, List<HJ212_Server.Model.RunningTimeData> Data, HJ212_Server.Model.RspInfo RspInfo) objects)
+        private async Task ClientViewModel_OnUploadRunningTimeData(Guid clientId, (DateTime DataTime, List<HJ212_Server.Model.RunningTimeData> Data, HJ212_Server.Model.RspInfo RspInfo) objects)
         {
             await App.Current.Dispatcher.InvokeAsync(() =>
             {
@@ -714,7 +706,7 @@ namespace GBServerTest.ViewModel
             }
             try
             {
-                _MinuteHistoryDatas = await _gb.GetMinuteDataAsync((int)ClientId!, MN, PW, ST, startTime, endTime, TimeOut_C20);
+                _MinuteHistoryDatas = await _gb.GetMinuteDataAsync(ClientId, MN, PW, ST, startTime, endTime, TimeOut_C20);
                 Total_C20 = _MinuteHistoryDatas.Count;
                 Index_C20 = 1;
             }
@@ -786,7 +778,7 @@ namespace GBServerTest.ViewModel
             }
             try
             {
-                _HourHistoryDatas = await _gb.GetHourDataAsync((int)ClientId!, MN, PW, ST, startTime, endTime, TimeOut_C21);
+                _HourHistoryDatas = await _gb.GetHourDataAsync(ClientId, MN, PW, ST, startTime, endTime, TimeOut_C21);
                 Total_C21 = _HourHistoryDatas.Count;
                 Index_C21 = 1;
             }
@@ -858,7 +850,7 @@ namespace GBServerTest.ViewModel
             }
             try
             {
-                _DayHistoryDatas = await _gb.GetDayDataAsync((int)ClientId!, MN, PW, ST, startTime, endTime, TimeOut_C22);
+                _DayHistoryDatas = await _gb.GetDayDataAsync(ClientId, MN, PW, ST, startTime, endTime, TimeOut_C22);
                 Total_C22 = _DayHistoryDatas.Count;
                 Index_C22 = 1;
             }
@@ -929,7 +921,7 @@ namespace GBServerTest.ViewModel
             }
             try
             {
-                _RunningTimeHistoryDatas = await _gb.GetRunningTimeDataAsync((int)ClientId!, MN, PW, ST, startTime, endTime, TimeOut_C23);
+                _RunningTimeHistoryDatas = await _gb.GetRunningTimeDataAsync(ClientId, MN, PW, ST, startTime, endTime, TimeOut_C23);
                 Total_C23 = _RunningTimeHistoryDatas.Count;
                 Index_C23 = 1;
             }
@@ -955,7 +947,6 @@ namespace GBServerTest.ViewModel
         {
             if (value)
             {
-                _gb!.OnUploadAcquisitionDeviceRestartTime -= ClientViewModel_OnUploadAcquisitionDeviceRestartTime;
                 _gb!.OnUploadAcquisitionDeviceRestartTime += ClientViewModel_OnUploadAcquisitionDeviceRestartTime;
             }
             else
@@ -964,7 +955,7 @@ namespace GBServerTest.ViewModel
             }
         }
 
-        private async Task ClientViewModel_OnUploadAcquisitionDeviceRestartTime(int clientId, (DateTime DataTime, DateTime RestartTime, HJ212_Server.Model.RspInfo RspInfo) objects)
+        private async Task ClientViewModel_OnUploadAcquisitionDeviceRestartTime(Guid clientId, (DateTime DataTime, DateTime RestartTime, HJ212_Server.Model.RspInfo RspInfo) objects)
         {
             await App.Current.Dispatcher.InvokeAsync(() =>
             {
@@ -994,7 +985,7 @@ namespace GBServerTest.ViewModel
             }
             try
             {
-                await _gb.CalibrateAsync((int)ClientId!, MN, PW, ST, C30PolId, TimeOut_C30);
+                await _gb.CalibrateAsync(ClientId, MN, PW, ST, C30PolId, TimeOut_C30);
             }
             catch (TimeoutException)
             {
@@ -1027,7 +1018,7 @@ namespace GBServerTest.ViewModel
             }
             try
             {
-                await _gb.RealTimeSamplingAsync((int)ClientId!, MN, PW, ST, C31PolId, TimeOut_C31);
+                await _gb.RealTimeSamplingAsync(ClientId, MN, PW, ST, C31PolId, TimeOut_C31);
             }
             catch (TimeoutException)
             {
@@ -1060,7 +1051,7 @@ namespace GBServerTest.ViewModel
             }
             try
             {
-                await _gb.StartCleaningOrBlowbackAsync((int)ClientId!, MN, PW, ST, C32PolId, TimeOut_C32);
+                await _gb.StartCleaningOrBlowbackAsync(ClientId, MN, PW, ST, C32PolId, TimeOut_C32);
             }
             catch (TimeoutException)
             {
@@ -1093,7 +1084,7 @@ namespace GBServerTest.ViewModel
             }
             try
             {
-                await _gb.ComparisonSamplingAsync((int)ClientId!, MN, PW, ST, C33PolId, TimeOut_C33);
+                await _gb.ComparisonSamplingAsync(ClientId, MN, PW, ST, C33PolId, TimeOut_C33);
             }
             catch (TimeoutException)
             {
@@ -1128,7 +1119,7 @@ namespace GBServerTest.ViewModel
             }
             try
             {
-                (DateTime DataTime, string VaseNo) rs = await _gb.OutOfStandardRetentionSampleAsync((int)ClientId!, MN, PW, ST, TimeOut_C34);
+                (DateTime DataTime, string VaseNo) rs = await _gb.OutOfStandardRetentionSampleAsync(ClientId, MN, PW, ST, TimeOut_C34);
                 DataTime_C34 = rs.DataTime.ToString("yyyy-MM-dd HH:mm:ss");
                 VaseNo = rs.VaseNo;
             }
@@ -1165,14 +1156,14 @@ namespace GBServerTest.ViewModel
                 MessageBox.Show("PW空");
                 return;
             }
-            if (!TimeOnly.TryParseExact(CstartTime,"HHmmss", out var startTime))
+            if (!TimeOnly.TryParseExact(CstartTime, "HHmmss", out var startTime))
             {
                 MessageBox.Show("开始时间有误");
                 return;
             }
             try
             {
-                await _gb.SetSamplingPeriodAsync((int)ClientId!, MN, PW, ST, C35PolId, startTime, Ctime, TimeOut_C35);
+                await _gb.SetSamplingPeriodAsync(ClientId, MN, PW, ST, C35PolId, startTime, Ctime, TimeOut_C35);
             }
             catch (TimeoutException)
             {
@@ -1182,6 +1173,176 @@ namespace GBServerTest.ViewModel
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+        #endregion
+
+        #region C36
+        [ObservableProperty]
+        private int _timeOut_C36 = 5000;
+        [ObservableProperty]
+        private string _c36PolId = "w01018";
+        [ObservableProperty]
+        private string? _cstartTime_C36;
+        [ObservableProperty]
+        private int? _ctime_C36;
+        [RelayCommand]
+        private async Task C36TestAsync()
+        {
+            if (MN == null)
+            {
+                MessageBox.Show("MN空");
+                return;
+            }
+            if (PW == null)
+            {
+                MessageBox.Show("PW空");
+                return;
+            }
+            try
+            {
+                var rs = await _gb.GetSamplingPeriodAsync(ClientId, MN, PW, ST, C36PolId, TimeOut_C36);
+                CstartTime_C36 = rs.CstartTime.ToString("HHmmss");
+                Ctime_C36 = rs.CTime;
+            }
+            catch (TimeoutException)
+            {
+                MessageBox.Show("请求超时");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
+
+        #region C37
+        [ObservableProperty]
+        private int _timeOut_C37 = 5000;
+        [ObservableProperty]
+        private string _c37PolId = "w01018";
+        [ObservableProperty]
+        private int? _stime_C37;
+        [RelayCommand]
+        private async Task C37TestAsync()
+        {
+            if (MN == null)
+            {
+                MessageBox.Show("MN空");
+                return;
+            }
+            if (PW == null)
+            {
+                MessageBox.Show("PW空");
+                return;
+            }
+            try
+            {
+                Stime_C37 = await _gb.GetSampleExtractionTimeAsync(ClientId, MN, PW, ST, C37PolId, TimeOut_C37);
+            }
+            catch (TimeoutException)
+            {
+                MessageBox.Show("请求超时");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
+
+        #region C38
+        [ObservableProperty]
+        private int _timeOut_C38 = 5000;
+        [ObservableProperty]
+        private string _c38PolId = "w01018";
+        [ObservableProperty]
+        private string? _SN_C38;
+        [RelayCommand]
+        private async Task C38TestAsync()
+        {
+            if (MN == null)
+            {
+                MessageBox.Show("MN空");
+                return;
+            }
+            if (PW == null)
+            {
+                MessageBox.Show("PW空");
+                return;
+            }
+            try
+            {
+                SN_C38 = await _gb.GetSNAsync(ClientId, MN, PW, ST, C38PolId, TimeOut_C38);
+            }
+            catch (TimeoutException)
+            {
+                MessageBox.Show("请求超时");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
+
+        #region C39
+        [ObservableProperty]
+        private string? _polId_C39;
+        [ObservableProperty]
+        private string? _SN_C39;
+        [ObservableProperty]
+        private bool _C39;
+        partial void OnC39Changed(bool value)
+        {
+            if (value)
+            {
+                _gb!.OnUploadSN += ClientViewModel_OnUploadSN;
+            }
+            else
+            {
+                _gb!.OnUploadSN -= ClientViewModel_OnUploadSN;
+            }
+        }
+
+        private async Task ClientViewModel_OnUploadSN(Guid clientId, (DateTime DataTime, string PolId, string SN, HJ212_Server.Model.RspInfo RspInfo) objects)
+        {
+            await App.Current.Dispatcher.InvokeAsync(() =>
+            {
+                PolId_C39 = objects.PolId;
+                SN_C39 = objects.SN;
+            });
+        }
+        #endregion
+
+        #region C40
+        [ObservableProperty]
+        private string? _DataTime_C40;
+        [ObservableProperty]
+        private string? _PolId_C40;
+        [ObservableProperty]
+        private string? _Info_C40;
+        [ObservableProperty]
+        private bool _C40;
+        partial void OnC40Changed(bool value)
+        {
+            if (value)
+            {
+                _gb!.OnUploadLog += ClientViewModel_OnUploadLog;
+            }
+            else
+            {
+                _gb!.OnUploadLog -= ClientViewModel_OnUploadLog;
+            }
+        }
+
+        private async Task ClientViewModel_OnUploadLog(Guid clientId, (DateTime DataTime, string? PolId, string Log, HJ212_Server.Model.RspInfo RspInfo) objects)
+        {
+            await App.Current.Dispatcher.InvokeAsync(() =>
+            {
+                DataTime_C40 = objects.DataTime.ToString("yyyy-MM-dd HH:mm:ss");
+                PolId_C40 = objects.PolId;
+                Info_C40 = objects.Log;
+            });
         }
         #endregion
     }
