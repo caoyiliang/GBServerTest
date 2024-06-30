@@ -7,7 +7,7 @@ namespace Config.Model
     public partial class Connection : ObservableObject
     {
         [ObservableProperty]
-        private string _HostName = "127.0.0.1";
+        private string _HostName = "Any";
         [ObservableProperty]
         private int _Port = 2756;
 
